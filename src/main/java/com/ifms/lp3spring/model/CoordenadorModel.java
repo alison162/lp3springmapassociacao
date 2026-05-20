@@ -1,13 +1,9 @@
 package com.ifms.lp3spring.model;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -36,16 +32,6 @@ public class CoordenadorModel extends PessoaModel {
     @NotBlank(message = "Email não pode ser vazio")
     @Email(message = "E-mail inválido")
     private String emailInstitucional;
-
-
-    @ManyToMany
-    @JoinTable(
-    name = "aluno_disciplina",
-    joinColumns = @JoinColumn(name = "aluno_id"),
-    inverseJoinColumns = @JoinColumn(name = "disciplina_id")
-)
-
-private List<DisciplinaModel> disciplinas;
     
 
     public CoordenadorModel() {

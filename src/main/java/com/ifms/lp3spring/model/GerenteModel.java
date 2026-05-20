@@ -23,7 +23,7 @@ public class GerenteModel extends PessoaModel {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataPosse;
     @OneToMany(mappedBy="gerente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<DisciplinaModel> disciplinas;
+    private List<DepartamentoModel> departamentos;
 
     public GerenteModel() {
     }
@@ -43,12 +43,12 @@ public class GerenteModel extends PessoaModel {
         this.dataPosse = dataPosse;
     }
 
-    public List<DisciplinaModel> getDisciplinas() {
-        return disciplinas;
+    public List<DepartamentoModel> getDepartamento() {
+        return departamentos;
     }
 
-    public void setDisciplinas(List<DisciplinaModel> disciplinas) {
-        this.disciplinas = disciplinas;
+    public void setDepartamento(List<DepartamentoModel> departamento) {
+        this.departamentos = departamento;
     }
 
 }
