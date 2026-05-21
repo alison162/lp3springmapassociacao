@@ -7,7 +7,7 @@
 
 <body>
     <div class=" container" layout:fragment="conteudoprincipal">
-        <div class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis bg-body-secondary">
+        <div class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis" style="background-color: #E9F1FA;">
             <div class="col-lg-6 px-0">
                 <h1 class="display-4 fst-italic">Salvar Coordenador</h1>
                 <p class="lead my-3">Preencha os dados do Coordenador.</p>
@@ -17,55 +17,55 @@
 
         <form action="/salvarcoordenador" method="post" th:object="${coordenador}">
             <div class="row mb-3">
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <label for="nome" class="form-label">Nome</label>
                     <input type="text" class="form-control" th:field="*{nome}">
-                    <ul>
-                        <li th:each="error : ${#fields.errors('nome')}" th:text="${error}" class="text-danger"></li>
-                    </ul>
                 </div>
-                <div class="col-md-4">
-                    <label for="cpf" class="form-label">CPF</label>
-                    <input type="text" class="form-control" th:field="*{cpf}" aria-describedby="cpfHelp">
-                    <ul>
-                        <li th:each="error : ${#fields.errors('cpf')}" th:text="${error}" class="text-danger"></li>
-                    </ul>
-                    <div id="cpfHelp" class="form-text">Nunca compartilhe seu CPF com ninguém.</div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" th:field="*{email}">
                 </div>
             </div>
+
             <div class="row mb-3">
                 <div class="col-md-4">
-                    <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-                    <input type="date" class="form-control" th:field="*{dataNascimento}">
-                    <ul>
-                        <li th:each="error : ${#fields.errors('dataNascimento')}" th:text="${error}"
-                            class="text-danger"></li>
-                    </ul>
+                    <label for="salario" class="form-label">Salário</label>
+                    <input type="number" step="0.01" class="form-control" th:field="*{salario}">
                 </div>
                 <div class="col-md-4">
-                    <label for="dataIngresso" class="form-label">Data de Ingresso</label>
-                    <input type="date" class="form-control" th:field="*{dataIngresso}">
-                    <ul>
-                        <li th:each="error : ${#fields.errors('dataIngresso')}" th:text="${error}" class="text-danger">
-                        </li>
-                    </ul>
+                    <label for="dataAdmissao" class="form-label">Data de Admissão</label>
+                    <input type="date" class="form-control" th:field="*{dataAdmissao}">
                 </div>
-
                 <div class="col-md-4">
-                    <label for="nivelDeAutorizacao" class="form-label">Nível de Autorização</label>
-                    <input type="text" class="form-control" th:field="*{nivelDeAutorizacao}"
-                        aria-describedby="nivelDeAutorizacaoHelp">
-                    <ul>
-                        <li th:each="error : ${#fields.errors('nivelDeAutorizacao')}" th:text="${error}"
-                            class="text-danger"></li>
-                    </ul>
-                    <div id="nivelDeAutorizacaoHelp" class="form-text">Preencimento obrigatório.</div>
-                </div>
-
-                <div class="col-md-12 mt-4">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <label for="status" class="form-label">Status</label>
+                    <select id="status" class="form-select" th:field="*{status}">
+                        <option value="Ativo">Ativo</option>
+                        <option value="Inativo">Inativo</option>
+                    </select>
                 </div>
             </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="cargaHoraria" class="form-label">Carga Horária</label>
+                    <input type="number" class="form-control" th:field="*{cargaHoraria}">
+                </div>
+                <div class="col-md-8">
+                    <label for="observacoes" class="form-label">Observações</label>
+                    <textarea class="form-control" th:field="*{observacoes}"></textarea>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <label for="departamento" class="form-label">Departamento</label>
+                    <select id="departamento" class="form-select" th:field="*{departamento}">
+                        <option th:each="dep : ${departamentos}" th:value="${dep}" th:text="${dep.nome}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
     </div>
     </div>

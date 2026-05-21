@@ -3,25 +3,23 @@ package com.ifms.lp3spring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import com.ifms.lp3spring.Repository.DepartamentoRepository;
+import org.springframework.web.servlet.ModelAndView;
+import com.ifms.lp3spring.Service.DepartamentoService;
+import com.ifms.lp3spring.model.DepartamentoModel;
 
 @Controller
 public class DepartamentoController {
+
     @Autowired
-    private DepartamentoRepository departamentoRepository;
+    private DepartamentoService departamentoService;
 
-    @GetMapping("salvardepartamento")
-    public String getSalvar() {
-        return "departamento/salvardepartamento";
+    @GetMapping("/salvardepartamento")
+    public ModelAndView getSalvarDepartamento() {
+        return new ModelAndView("departamento/salvardepartamento", "departamento", new DepartamentoModel());
     }
 
-
-    public DepartamentoRepository getDepartamentoRepository(){
-        return departamentoRepository;
-    }
-
-    public void setDepartamentoRepository(DepartamentoRepository departamentoRepository) {
-        this.departamentoRepository = departamentoRepository;
+    @GetMapping("/listardepartamentos")
+    public ModelAndView listarDepartamentos() {
+        return new ModelAndView("departamento/listardepartamentos", "departamentos", departamentoService.buscarTodos());
     }
 }

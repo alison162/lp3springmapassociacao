@@ -1,83 +1,60 @@
 package com.ifms.lp3spring.model;
-import java.sql.Date;
-import java.time.LocalDate;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import java.time.LocalDate;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 
 @Entity
-@PrimaryKeyJoinColumn(name="idPessoa")
+@PrimaryKeyJoinColumn(name = "idPessoa")
 @Table(name = "coordenador")
-public class CoordenadorModel extends PessoaModel {
-    
-    @NotNull(message = "RA não pode ser nulo")
-    @Min(value = 4, message = "RA deve ter pelo menos 4 caracteres")
-    private int ra;
+public class CoordenadorModel extends FuncionarioModel {
 
-    @PastOrPresent(message = "Data de ingresso não pode ser futura")
-    @NotNull(message = "Data de ingresso não pode ser nulo")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dataIngresso;
+    @Min(value = 1, message = "Carga horária deve ser no mínimo 1 hora")
+    private Integer cargaHoraria;
 
-    @NotBlank(message = "Curso não pode estar vazio")
-    private String curso;
+    @Size(max = 255, message = "Observações não podem exceder 255 caracteres")
+    private String observacoes;
 
-    @NotBlank(message = "Email não pode ser vazio")
-    @Email(message = "E-mail inválido")
-    private String emailInstitucional;
-    
+    @ManyToOne
+    private DepartamentoModel departamento;
 
     public CoordenadorModel() {
     }
 
-    public CoordenadorModel(String nome, Long cpf, Date dataNascimento, int ra, LocalDate dataIngresso, String curso, String emailInstitucional) {
-        super(nome, cpf, dataNascimento);
-        this.ra = ra;
-        this.dataIngresso = dataIngresso;
-        this.curso = curso;
-        this.emailInstitucional = emailInstitucional;
+    public CoordenadorModel(String nome, String email, Double salario, LocalDate dataAdmissao, String status,
+            Integer cargaHoraria, String observacoes) {
+        super(nome, email, salario, dataAdmissao, status);
+        this.cargaHoraria = cargaHoraria;
+        this.observacoes = observacoes;
+
     }
 
-    public int getRa() {
-        return ra;
+    public Integer getCargaHoraria() {
+        return cargaHoraria;
     }
 
-    public void setRa(int ra) {
-        this.ra = ra;
+    public void setCargaHoraria(Integer cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
     }
 
-    public void setDataIngresso(LocalDate dataIngresso) {
-        this.dataIngresso = dataIngresso;
+    public String getObservacoes() {
+        return observacoes;
     }
 
-    public LocalDate getDataIngresso() {
-        return dataIngresso;
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
     }
 
-    public String getCurso() {
-        return curso;
+    public DepartamentoModel getDepartamento() {
+        return departamento;
     }
 
-    public void setCurso(String curso) {
-        this.curso = curso;
+    public void setDepartamento(DepartamentoModel departamento) {
+        this.departamento = departamento;
     }
-
-    public String getEmailInstitucional() {
-        return emailInstitucional;
-    }
-
-    public void setEmailInstitucional(String emailInstitucional) {
-        this.emailInstitucional = emailInstitucional;
-    }
-
-    
 
 }
-

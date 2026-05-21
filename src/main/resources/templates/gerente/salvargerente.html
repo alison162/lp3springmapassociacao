@@ -7,7 +7,7 @@
 
 <body>
     <div class=" container" layout:fragment="conteudoprincipal">
-        <div class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis bg-body-secondary">
+        <div class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis", style="background-color: #E9F1FA;">
             <div class="col-lg-6 px-0">
                 <h1 class="display-4 fst-italic">Salvar Gerente</h1>
                 <p class="lead my-3">Preencha os dados do gerente .</p>
@@ -45,17 +45,17 @@
                 </div>
                 <div class="col-md-4">
                     <label for="nivelDeAcesso" class="form-label">Nível de Acesso</label>
-                    <input type="number" class="form-control" th:field="*{nivelDeAceso}" aria-describedby="nivelDeAceso">
+                    <input type="number" class="form-control" th:field="*{nivelDeAcesso}" aria-describedby="nivelDeAceso">
                     <ul>
                         <li th:each="error : ${#fields.errors('nivelDeAcesso')}" th:text="${error}" class="text-danger"></li>
                     </ul>
-                    <div id="nivelDeAceso" class="form-text">Preencimento obrigatório.</div>
+                    <div id="nivelDeAcesso" class="form-text">Preencimento obrigatório.</div>
                 </div>
                 <div class="col-md-4">
-                    <label for="dataPosse" class="form-label">Data de Posse</label>
-                    <input type="date" class="form-control" th:field="*{dataPosse}">
+                    <label for="dataAdmissao" class="form-label">Data de Admissão</label>
+                    <input type="date" class="form-control" th:field="*{dataAdmissao}">
                     <ul>
-                        <li th:each="error : ${#fields.errors('dataPosse')}" th:text="${error}" class="text-danger"></li>
+                        <li th:each="error : ${#fields.errors('dataAdmissao')}" th:text="${error}" class="text-danger"></li>
                     </ul>
                 </div>
                 <div class="col-md-12 mt-4">

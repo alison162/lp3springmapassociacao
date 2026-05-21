@@ -1,5 +1,7 @@
 package com.ifms.lp3spring.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ifms.lp3spring.Repository.DepartamentoRepository;
@@ -19,6 +21,25 @@ public class DepartamentoService {
         return "Salvo com Sucesso";
     }
     
+
+    public List<DepartamentoModel> buscarTodos() {
+        return departamentoRepository.findAll();
+    }
+
+    public String remover(Long id) {
+        try {
+            departamentoRepository.deleteById(id);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "Removido com Sucesso";
+    }
+    
+    public DepartamentoModel buscarPorId(Long id) {
+        return departamentoRepository.findById(id).orElse(null);
+    }
+
+
     public DepartamentoRepository getDeparmentoRepository() {
         return departamentoRepository;
     }

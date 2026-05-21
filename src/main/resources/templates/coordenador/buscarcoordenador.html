@@ -2,14 +2,14 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layoutprincipal.html}">
 
 <head>
-    <title>Manter Gerente</title>
+    <title>Manter Coordenador</title>
 </head>
 
 <body>
     <div class=" container" layout:fragment="conteudoprincipal">
-        <div class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis" style="background-color: #E9F1FA">
+        <div class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis" style="background-color: #E9F1FA;">
             <div class="col-lg-6 px-0">
-                <h1 class="display-4 fst-italic">Manter Gerente</h1>
+                <h1 class="display-4 fst-italic">Manter Coordenador</h1>
             </div>
         </div>
         <table class="table">
@@ -20,22 +20,22 @@
                     <th scope="col">CPF</th>
                     <th scope="col">Data de Nascimento</th>
                     <th scope="col">Data de Admissão</th>
-                    <th scope="col">Nível de Acesso</th>
+                    <th scope="col">Status</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="gerente : ${gerentes}">
-                    <th scope="row"><span th:text="${gerente.idPessoa}"></span></th>
-                    <td><span th:text="${gerente.nome}"></span></td>
-                    <td><span th:text="${gerente.cpf}"></span></td>
-                    <td><span th:text="${#dates.format(gerente.dataNascimento, 'dd/MM/yyyy')}"></span></td>
-                    <td><span th:text="${#dates.format(gerente.dataAdmissao, 'dd/MM/yyyy')}"></span></td>
-                    <td><span th:text="${gerente.nivelDeAcesso}"></span></td>
+                <tr th:each="coordenador : ${coordenadores}">
+                    <th scope="row"><span th:text="${coordenador.idPessoa}"></span></th>
+                    <td><span th:text="${coordenador.nome}"></span></td>
+                    <td><span th:text="${coordenador.cpf}"></span></td>
+                    <td><span th:text="${#dates.format(coordenador.dataNascimento, 'dd/MM/yyyy')}"></span></td>
+                    <td><span th:text="${#dates.format(coordenador.dataAdmissao, 'dd/MM/yyyy')}"></span></td>
+                    <td><span th:text="${coordenador.status}"></span></td>
                     <td>
-                        <form th:action="@{/salvargerente/{id}(id=${gerente.idPessoa})}" method="get"
-                            onsubmit="return confirm('Deseja realmente editar este gerente?');">
+                        <form th:action="@{/salvarcoordenador/{id}(id=${coordenador.idPessoa})}" method="get"
+                            onsubmit="return confirm('Deseja realmente editar este coordenador?');">
                             <button type="submit" class="btn btn-warning">Editar</button>
                         </form>
                     </td>
