@@ -15,58 +15,71 @@
             </div>
         </div>
 
-        <form action="/salvarcoordenador" method="post" th:object="${coordenador}">
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" th:field="*{nome}">
-                </div>
-                <div class="col-md-6">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" th:field="*{email}">
-                </div>
-            </div>
+        <form th:action="@{/salvarcoordenador}" th:object="${coordenador}" method="post" class="row g-3">
 
-            <div class="row mb-3">
-                <div class="col-md-4">
-                    <label for="salario" class="form-label">Salário</label>
-                    <input type="number" step="0.01" class="form-control" th:field="*{salario}">
-                </div>
-                <div class="col-md-4">
-                    <label for="dataAdmissao" class="form-label">Data de Admissão</label>
-                    <input type="date" class="form-control" th:field="*{dataAdmissao}">
-                </div>
-                <div class="col-md-4">
-                    <label for="status" class="form-label">Status</label>
-                    <select id="status" class="form-select" th:field="*{status}">
-                        <option value="Ativo">Ativo</option>
-                        <option value="Inativo">Inativo</option>
-                    </select>
-                </div>
-            </div>
+    <!-- Nome -->
+    <div class="col-md-6">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" th:field="*{nome}">
+        <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+    </div>
 
-            <div class="row mb-3">
-                <div class="col-md-4">
-                    <label for="cargaHoraria" class="form-label">Carga Horária</label>
-                    <input type="number" class="form-control" th:field="*{cargaHoraria}">
-                </div>
-                <div class="col-md-8">
-                    <label for="observacoes" class="form-label">Observações</label>
-                    <textarea class="form-control" th:field="*{observacoes}"></textarea>
-                </div>
-            </div>
+    <!-- Email -->
+    <div class="col-md-6">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" th:field="*{email}">
+        <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+    </div>
 
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    <label for="departamento" class="form-label">Departamento</label>
-                    <select id="departamento" class="form-select" th:field="*{departamento}">
-                        <option th:each="dep : ${departamentos}" th:value="${dep}" th:text="${dep.nome}"></option>
-                    </select>
-                </div>
-            </div>
+    <!-- CPF -->
+    <div class="col-md-6">
+        <label for="cpf" class="form-label">CPF</label>
+        <input type="text" class="form-control" th:field="*{cpf}">
+        <div class="text-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
+    </div>
 
-            <button type="submit" class="btn btn-primary">Salvar</button>
-        </form>
+    <!-- Salário -->
+    <div class="col-md-6">
+        <label for="salario" class="form-label">Salário</label>
+        <input type="number" step="0.01" class="form-control" th:field="*{salario}">
+        <div class="text-danger" th:if="${#fields.hasErrors('salario')}" th:errors="*{salario}"></div>
+    </div>
+
+    <!-- Data de Admissão -->
+    <div class="col-md-6">
+        <label for="dataAdmissao" class="form-label">Data de Admissão</label>
+        <input type="date" class="form-control" th:field="*{dataAdmissao}">
+        <div class="text-danger" th:if="${#fields.hasErrors('dataAdmissao')}" th:errors="*{dataAdmissao}"></div>
+    </div>
+
+    <!-- Data de Nascimento -->
+    <div class="col-md-6">
+        <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+        <input type="date" class="form-control" th:field="*{dataNascimento}">
+        <div class="text-danger" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></div>
+    </div>
+
+    <!-- Status -->
+    <div class="col-md-6">
+        <label for="status" class="form-label">Status</label>
+        <input type="text" class="form-control" th:field="*{status}">
+        <div class="text-danger" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></div>
+    </div>
+
+    <!-- Departamento -->
+    <div class="col-md-12">
+        <label for="departamento" class="form-label">Departamento</label>
+        <select id="departamento" class="form-select" th:field="*{departamento.idDepartamento}">
+            <option th:each="dep : ${departamentos}" th:value="${dep.idDepartamento}" th:text="${dep.nome}"></option>
+        </select>
+        <div class="text-danger" th:if="${#fields.hasErrors('departamento')}" th:errors="*{departamento}"></div>
+    </div>
+
+    <!-- Botão -->
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+</form>
     </div>
     </div>
 </body>

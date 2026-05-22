@@ -21,6 +21,14 @@ public class DepartamentoService {
         return "Salvo com Sucesso";
     }
     
+    public String salvarEatualizar (DepartamentoModel departamento) {
+        try {
+            departamentoRepository.save(departamento);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "Salvo com Sucesso";
+    }
 
     public List<DepartamentoModel> buscarTodos() {
         return departamentoRepository.findAll();

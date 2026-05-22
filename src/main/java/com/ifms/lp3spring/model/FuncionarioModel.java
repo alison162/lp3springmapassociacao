@@ -1,6 +1,7 @@
 package com.ifms.lp3spring.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,6 +26,13 @@ public abstract class FuncionarioModel{
 
     @NotBlank
     private String nome;
+
+    @NotBlank
+    private String cpf;
+
+    @PastOrPresent
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    protected LocalDate dataNascimento;
 
     @Email
     private String email;
@@ -90,12 +98,39 @@ public abstract class FuncionarioModel{
         this.status = status;
     }
 
-    public FuncionarioModel(String nome, String email, Double salario, LocalDate dataAdmissao, String status) {
+    
+
+    public String getCpf() {
+        return cpf;
+    }
+
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getDataAdmissaoFormatada() {
+    return dataAdmissao != null ? dataAdmissao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "";
+}
+
+    public FuncionarioModel(String nome, String email, Double salario, LocalDate dataAdmissao, String status, String cpf, LocalDate dataNascimento) {
         this.nome = nome;
         this.email = email;
         this.salario = salario;
         this.dataAdmissao = dataAdmissao;
         this.status = status;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
     }
 
 }

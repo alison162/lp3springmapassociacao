@@ -27,21 +27,21 @@
             </thead>
             <tbody>
                 <tr th:each="coordenador : ${coordenadores}">
-                    <th scope="row"><span th:text="${coordenador.idPessoa}"></span></th>
+                    <th scope="row"><span th:text="${coordenador.id}"></span></th>
                     <td><span th:text="${coordenador.nome}"></span></td>
                     <td><span th:text="${coordenador.cpf}"></span></td>
-                    <td><span th:text="${#dates.format(coordenador.dataNascimento, 'dd/MM/yyyy')}"></span></td>
-                    <td><span th:text="${#dates.format(coordenador.dataAdmissao, 'dd/MM/yyyy')}"></span></td>
+                    <td><span th:text="${#temporals.format(coordenador.dataNascimento, 'dd/MM/yyyy')}"></span></td>
+                    <td><span th:text="${#temporals.format(coordenador.dataAdmissao, 'dd/MM/yyyy')}"></span></td>
                     <td><span th:text="${coordenador.status}"></span></td>
                     <td>
-                        <form th:action="@{/salvarcoordenador/{id}(id=${coordenador.idPessoa})}" method="get"
+                        <form th:action="@{/editarcoordenador/{id}(id=${coordenador.id})}" method="get"
                             onsubmit="return confirm('Deseja realmente editar este coordenador?');">
                             <button type="submit" class="btn btn-warning">Editar</button>
                         </form>
                     </td>
                     <td>
-                        <form th:action="@{/removergerente/{id}(id=${gerente.idPessoa})}" method="get"
-                            onsubmit="return confirm('Deseja realmente remover este gerente?');">
+                        <form th:action="@{/removercoordenador/{id}(id=${coordenador.id})}" method="get"
+                            onsubmit="return confirm('Deseja realmente remover este coordenador?');">
                             <button type="submit" class="btn btn-danger">Remover</button>
                         </form>
                     </td>

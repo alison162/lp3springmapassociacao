@@ -31,7 +31,7 @@ public class GerenteController {
         }
         
         gerenteService.inserir(gerente);
-        return "redirect:/salvargerente";
+        return "redirect:/mantergerente";
     }  
 
     @GetMapping("/mantergerente")

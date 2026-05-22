@@ -27,20 +27,20 @@
             </thead>
             <tbody>
                 <tr th:each="gerente : ${gerentes}">
-                    <th scope="row"><span th:text="${gerente.idPessoa}"></span></th>
+                    <th scope="row"><span th:text="${gerente.id}"></span></th>
                     <td><span th:text="${gerente.nome}"></span></td>
                     <td><span th:text="${gerente.cpf}"></span></td>
-                    <td><span th:text="${#dates.format(gerente.dataNascimento, 'dd/MM/yyyy')}"></span></td>
-                    <td><span th:text="${#dates.format(gerente.dataAdmissao, 'dd/MM/yyyy')}"></span></td>
+                    <td th:text="${#temporals.format(gerente.dataNascimento, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#temporals.format(gerente.dataAdmissao, 'dd/MM/yyyy')}"></td>
                     <td><span th:text="${gerente.nivelDeAcesso}"></span></td>
                     <td>
-                        <form th:action="@{/salvargerente/{id}(id=${gerente.idPessoa})}" method="get"
+                        <form th:action="@{/salvargerente/{id}(id=${gerente.id})}" method="get"
                             onsubmit="return confirm('Deseja realmente editar este gerente?');">
                             <button type="submit" class="btn btn-warning">Editar</button>
                         </form>
                     </td>
                     <td>
-                        <form th:action="@{/removergerente/{id}(id=${gerente.idPessoa})}" method="get"
+                        <form th:action="@{/removergerente/{id}(id=${gerente.id})}" method="get"
                             onsubmit="return confirm('Deseja realmente remover este gerente?');">
                             <button type="submit" class="btn btn-danger">Remover</button>
                         </form>

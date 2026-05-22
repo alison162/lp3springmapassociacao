@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "idPessoa")
+@PrimaryKeyJoinColumn(name = "id")
 @Table(name = "coordenador")
 public class CoordenadorModel extends FuncionarioModel {
 
@@ -26,8 +26,8 @@ public class CoordenadorModel extends FuncionarioModel {
     }
 
     public CoordenadorModel(String nome, String email, Double salario, LocalDate dataAdmissao, String status,
-            Integer cargaHoraria, String observacoes) {
-        super(nome, email, salario, dataAdmissao, status);
+            Integer cargaHoraria, String observacoes, String cpf, LocalDate dataNascimento) {
+        super(nome, email, salario, dataAdmissao, status, cpf, dataNascimento);
         this.cargaHoraria = cargaHoraria;
         this.observacoes = observacoes;
 

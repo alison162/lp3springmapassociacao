@@ -3,10 +3,7 @@ package com.ifms.lp3spring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ifms.lp3spring.Service.CoordenadorService;
@@ -24,21 +21,26 @@ public class CoordenadorController {
     @Autowired
     private DepartamentoService departamentoService;
 
-    // GET para abrir o formulário
+    // GET para abrir formulário
     @GetMapping("/salvarcoordenador")
     public ModelAndView getSalvar() {
-        return new ModelAndView("coordenador/salvarcoordenador", "coordenador", new CoordenadorModel());
+        ModelAndView mv = new ModelAndView("coordenador/salvarcoordenador");
+        mv.addObject("coordenador", new CoordenadorModel());
+        mv.addObject("departamentos", departamentoService.buscarTodos());
+        return mv;
     }
 
     // POST para salvar
     @PostMapping("/salvarcoordenador")
-    public ModelAndView postSalvar(@Valid @ModelAttribute("coordenador") CoordenadorModel coordenador,
+    public ModelAndView salvar(@Valid @ModelAttribute("coordenador") CoordenadorModel coordenador,
                                    BindingResult result) {
         if (result.hasErrors()) {
             ModelAndView mv = new ModelAndView("coordenador/salvarcoordenador");
             mv.addObject("departamentos", departamentoService.buscarTodos());
             return mv;
         }
+        System.out.println(">>> Coordenador recebido: " + coordenador);
+System.out.println(">>> Departamento: " + coordenador.getDepartamento());
         coordenadorService.inserir(coordenador);
         return new ModelAndView("redirect:/mantercoordenador");
     }
@@ -49,23 +51,38 @@ public class CoordenadorController {
         return new ModelAndView("coordenador/buscarcoordenador", "coordenadores", coordenadorService.buscarTodos());
     }
 
-    // Remover por ID
+    // Editar coordenador
+    @GetMapping("/editarcoordenador/{id}")
+    public ModelAndView editar(@PathVariable("id") Long id) {
+        CoordenadorModel coord = coordenadorService.buscarPorId(id);
+        ModelAndView mv = new ModelAndView("coordenador/salvarcoordenador");
+        mv.addObject("coordenador", coord);
+        mv.addObject("departamentos", departamentoService.buscarTodos());
+        return mv;
+    }
+
+    // Remover coordenador
     @GetMapping("/removercoordenador/{id}")
-    public String deletar(@PathVariable("id") Long id) {
+    public String remover(@PathVariable("id") Long id) {
         coordenadorService.remover(id);
         return "redirect:/mantercoordenador";
     }
 
-    // Buscar por ID para edição
-    @GetMapping("/salvarcoordenador/{id}")
-    public ModelAndView buscarPorId(@PathVariable("id") Long id) {
-        CoordenadorModel coordenador = coordenadorService.buscarPorId(id);
-        if (coordenador == null) {
-            coordenador = new CoordenadorModel();
-        }
-        ModelAndView mv = new ModelAndView("coordenador/salvarcoordenador");
-        mv.addObject("coordenador", coordenador);
-        mv.addObject("departamentos", departamentoService.buscarTodos());
-        return mv;
+        
+    public CoordenadorService getCoordenadorService() {
+        return coordenadorService;
     }
+
+    public void setCoordenadorService(CoordenadorService coordenadorService) {
+        this.coordenadorService = coordenadorService;
+    }
+
+    public DepartamentoService getDepartamentoService() {
+        return departamentoService;
+    }
+
+    public void setDepartamentoService(DepartamentoService departamentoService) {
+        this.departamentoService = departamentoService;
+    }
+
 }

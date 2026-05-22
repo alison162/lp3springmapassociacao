@@ -14,13 +14,12 @@ public class CoordenadorService {
      @Autowired
     private CoordenadorRepository coordenadorRepository;
 
-    public String inserir (CoordenadorModel coordenador) {
+    public void inserir (CoordenadorModel coordenador) {
         try {
             coordenadorRepository.save(coordenador);
         } catch (Exception e) {
-            return e.getMessage();
+            throw new RuntimeException(e.getMessage(), e);
         }
-        return "Salvo com Sucesso";
     }
     
 
@@ -28,13 +27,12 @@ public class CoordenadorService {
         return coordenadorRepository.findAll();
     }
 
-    public String remover(Long id) {
+    public void remover(Long id) {
         try {
             coordenadorRepository.deleteById(id);
         } catch (Exception e) {
-            return e.getMessage();
+            throw new RuntimeException(e.getMessage(), e);
         }
-        return "Removido com Sucesso";
     }
     
     public CoordenadorModel buscarPorId(Long id) {
