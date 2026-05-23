@@ -1,34 +1,75 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layoutprincipal.html}">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layoutprincipal.html}">
 
 <head>
     <title>Salvar Departamento</title>
 </head>
 
 <body>
-    <div class=" container" layout:fragment="conteudoprincipal">
-        <div class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis" style="background-color: #E9F1FA;">
-            <div class="col-lg-6 px-0">
-                <h1 class="display-4 fst-italic">Salvar Departamento</h1>
-                <p class="lead my-3">Preencha os dados do Departamento .</p>
-                <p class="lead mb-0"><a href="#" class="text-body-emphasis fw-bold">Continue reading...</a></p>
-            </div>
+
+<div class="container"
+     layout:fragment="conteudoprincipal">
+
+    <div class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis"
+         style="background-color: #E9F1FA;">
+
+        <div class="col-lg-6 px-0">
+
+            <h1 class="display-4 fst-italic">
+                Salvar Departamento
+            </h1>
+
+            <p class="lead my-3">
+                Preencha os dados do Departamento.
+            </p>
+
         </div>
 
-        <form action="/salvardepartamento" method="post">
-            <div class="row mb-3">
-                <div class="col-md-8">
-                    <label for="inputnome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="inputnome" name="nome" aria-describedby="nomeHelp">
-                    <div id="nomeHelp" class="form-text">We'll never share your name with anyone else.</div>
-                </div>
-            </div>
-            <div class="col-md-12 mt-4">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-        </form>
     </div>
-    </div>
-</body>
 
+    <form th:action="@{/salvardepartamento}"
+          th:object="${departamento}"
+          method="post">
+
+        <div class="row mb-3">
+
+            <div class="col-md-8">
+
+                <label for="inputnome"
+                       class="form-label">
+                    Nome
+                </label>
+
+                <input type="text"
+                       class="form-control"
+                       id="inputnome"
+                       th:field="*{nome}">
+
+                <ul>
+                    <li th:each="error : ${#fields.errors('nome')}"
+                        th:text="${error}"
+                        class="text-danger">
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-12 mt-4">
+
+            <button type="submit"
+                    class="btn btn-primary">
+                Salvar
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
 </html>

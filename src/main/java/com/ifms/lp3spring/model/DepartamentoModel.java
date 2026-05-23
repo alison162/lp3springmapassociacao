@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "departamento")
@@ -23,7 +25,9 @@ public class DepartamentoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDepartamento;
 
-    @NotBlank
+    @NotBlank(message = "O nome do departamento é obrigatório")
+    @Size(min = 3, max = 80)
+    @Column(name= "nome_departamento", nullable = false, length = 80)
     private String nome;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -55,6 +59,22 @@ public class DepartamentoModel {
 
     public void setIdDepartamento(Long idDepartemento) {
         this.idDepartamento = idDepartemento;
+    }
+
+    public GerenteModel getGerente() {
+        return gerente;
+    }
+
+    public void setGerente(GerenteModel gerente) {
+        this.gerente = gerente;
+    }
+
+    public List<CoordenadorModel> getCoordenadores() {
+        return coordenadores;
+    }
+
+    public void setCoordenadores(List<CoordenadorModel> coordenadores) {
+        this.coordenadores = coordenadores;
     }
 
 }

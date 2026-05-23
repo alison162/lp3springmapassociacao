@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ifms.lp3spring.Service.DepartamentoService;
 import com.ifms.lp3spring.model.DepartamentoModel;
@@ -32,16 +33,19 @@ public class DepartamentoController {
             return "departamento/salvardepartamento";
         }
 
-        departamentoService.salvarEatualizar(departamento);
+        departamentoService.inserir(departamento);
         // igual ao DisciplinaController, redireciona para o próprio formulário
         return "redirect:/salvardepartamento";
     }
 
-    @GetMapping("/manterdepartamentos")
-    public String listarDepartamentos(Model model) {
-        model.addAttribute("departamentos", departamentoService.buscarTodos());
-        return "departamento/listardepartamentos";
+
+    
+      // Listar todos
+    @GetMapping("/manterdepartamento")
+    public ModelAndView buscar() {
+        return new ModelAndView("departamento/buscardepartamento", "departamentos", departamentoService.buscarTodos());
     }
+
 
     public DepartamentoService getDepartamentoService() {
         return departamentoService;

@@ -1,45 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layoutprincipal.html}">
+
 <head>
-    <title>Lista de Coordenadores</title>
+    <title>Lista de Departamentos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container mt-4">
-    <h1 class="mb-4">Coordenadores</h1>
-
+ <div class=" container" layout:fragment="conteudoprincipal">
+        <div class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis" style="background-color: #E9F1FA;">
+            <div class="col-lg-6 px-0">
+                <h1 class="display-4 fst-italic">Manter Departamento</h1>
+            </div>
+        </div>
     <table class="table table-striped table-hover">
-        <thead class="table-dark">
+        <thead class="table">
             <tr>
                 <th>Nome</th>
-                <th>Email</th>
-                <th>Salário</th>
-                <th>Data de Admissão</th>
-                <th>Status</th>
-                <th>Carga Horária</th>
-                <th>Departamento</th>
-                <th>Ações</th>
+                <th>Coordenador Responsável</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="coord : ${coordenadores}">
-                <td th:text="${coord.nome}"></td>
-                <td th:text="${coord.email}"></td>
-                <td th:text="${coord.salario}"></td>
-                <td th:text="${coord.dataAdmissao}"></td>
-                <td th:text="${coord.status}"></td>
-                <td th:text="${coord.cargaHoraria}"></td>
-                <!-- Aqui aparece o nome do departamento -->
-                <td th:text="${coord.departamento.nome}"></td>
+            <tr th:each="dep : ${departamentos}">
+                <td th:text="${dep.nome}"></td>
                 <td>
-                    <a th:href="@{'/editarcoordenador/' + ${coord.id}}" class="btn btn-sm btn-warning">Editar</a>
-                    <a th:href="@{'/removercoordenador/' + ${coord.id}}" class="btn btn-sm btn-danger">Remover</a>
-                </td>
+                    <span th:each="coord : ${dep.coordenadores}"
+                          th:text="${coord.nome + ' '}">
+                    </span></td>
             </tr>
         </tbody>
     </table>
 
-    <a href="/salvarcoordenador" class="btn btn-primary">Novo Coordenador</a>
+    <a href="/salvardepartamento" class="btn btn-primary">Novo Departamento</a>
 </div>
+
 </body>
 </html>

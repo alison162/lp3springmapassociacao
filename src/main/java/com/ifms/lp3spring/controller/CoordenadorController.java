@@ -33,14 +33,12 @@ public class CoordenadorController {
     // POST para salvar
     @PostMapping("/salvarcoordenador")
     public ModelAndView salvar(@Valid @ModelAttribute("coordenador") CoordenadorModel coordenador,
-                                   BindingResult result) {
+            BindingResult result) {
         if (result.hasErrors()) {
             ModelAndView mv = new ModelAndView("coordenador/salvarcoordenador");
             mv.addObject("departamentos", departamentoService.buscarTodos());
             return mv;
         }
-        System.out.println(">>> Coordenador recebido: " + coordenador);
-System.out.println(">>> Departamento: " + coordenador.getDepartamento());
         coordenadorService.inserir(coordenador);
         return new ModelAndView("redirect:/mantercoordenador");
     }
@@ -68,7 +66,6 @@ System.out.println(">>> Departamento: " + coordenador.getDepartamento());
         return "redirect:/mantercoordenador";
     }
 
-        
     public CoordenadorService getCoordenadorService() {
         return coordenadorService;
     }
