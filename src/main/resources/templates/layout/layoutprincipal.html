@@ -6,16 +6,16 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='css/bootstrap.min.css'>
-    <script src='js/bootstrap.bundle.min.js'></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </head>
 
 <body>
     <!-----------------Menu da aplicação------------------------------------------------------------------------------>
-    <nav class="navbar navbar-expand-lg", style="background-color: #00ABE4;">
+    <nav class="navbar navbar-expand-lg" , style="background-color: #00ABE4;">
         <div class="container-fluid">
             <a class="navbar-brand" target="_blank" href="/principal">
-                <img src="imagens/logo.png" height="10%" width="10%" alt="Logo da instituição do RH"></a>
+                <img th:src="@{/imagens/logo.png}" height="10%" width="10%" alt="Logo da instituição do RH"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -85,7 +85,7 @@
                             <li><a class="dropdown-item" href="#">Configurações</a></li>
                         </ul>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                     </li>
@@ -99,9 +99,11 @@
     </nav>
     <!------------------------------------------------------------------------------------------------------------------>
     <!-----------------Parte principal da aplicação------------------------------------------------------------------------------>
-    <div class="container" layout:fragment="conteudoprincipal">
-
+    <!-- Aqui o conteúdo das páginas filhas será injetado -->
+    <div class="container mt-4" layout:fragment="conteudoprincipal">
+        <!-- O Thymeleaf substitui isso pelo conteúdo da página filha -->
     </div>
+
     <!------------------------------------------------------------------------------------------------------------------>
     <footer class="bg-body-tertiary py-3 mt-5 border-top">
         <div class="container">

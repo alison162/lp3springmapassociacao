@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ifms.lp3spring.Service.GerenteService;
+import com.ifms.lp3spring.model.Cargo;
 import com.ifms.lp3spring.model.GerenteModel;
 
 import jakarta.validation.Valid;
@@ -30,6 +31,7 @@ public class GerenteController {
             return "gerente/salvargerente";
         }
         
+        gerente.setCargo(Cargo.GERENTE);
         gerenteService.inserir(gerente);
         return "redirect:/mantergerente";
     }  
@@ -51,7 +53,8 @@ public class GerenteController {
         if (gerente==null) {
             gerente = new GerenteModel();
         }
-        return new ModelAndView("/gerente/salvargerente", "gerente", new GerenteModel());
+        gerente.setCargo(Cargo.GERENTE);
+        return new ModelAndView("/gerente/salvargerente", "gerente", gerente);
     }
 
     public GerenteService getGerenteService() {

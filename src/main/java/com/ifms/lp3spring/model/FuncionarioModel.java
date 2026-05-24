@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,10 +18,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
 
-
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
-public abstract class FuncionarioModel{
+public abstract class FuncionarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,12 +44,14 @@ public abstract class FuncionarioModel{
     @PastOrPresent
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataAdmissao;
-    
+
     private String status;
 
-     public FuncionarioModel() {
-    }
+    @Enumerated(EnumType.STRING)
+    private Cargo cargo; // novo campo
 
+    public FuncionarioModel() {
+    }
 
     public Long getId() {
         return id;
@@ -98,32 +101,37 @@ public abstract class FuncionarioModel{
         this.status = status;
     }
 
-    
-
     public String getCpf() {
         return cpf;
     }
-
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
-
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
     public String getDataAdmissaoFormatada() {
-    return dataAdmissao != null ? dataAdmissao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "";
-}
+        return dataAdmissao != null ? dataAdmissao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "";
+    }
 
-    public FuncionarioModel(String nome, String email, Double salario, LocalDate dataAdmissao, String status, String cpf, LocalDate dataNascimento) {
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    
+    public FuncionarioModel(String nome, String email, Double salario, LocalDate dataAdmissao, String status,
+            String cpf, LocalDate dataNascimento, Cargo cargo) {
         this.nome = nome;
         this.email = email;
         this.salario = salario;
@@ -131,6 +139,9 @@ public abstract class FuncionarioModel{
         this.status = status;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
+        this.cargo = cargo;
     }
+
+    
 
 }

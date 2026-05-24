@@ -27,8 +27,8 @@ public class GerenteModel extends FuncionarioModel {
 
     
     public GerenteModel(String nome, String email, Double salario, LocalDate dataAdmissao, String status, String cpf,
-            LocalDate dataNascimento, Integer nivelDeAcesso) {
-        super(nome, email, salario, dataAdmissao, status, cpf, dataNascimento);
+            LocalDate dataNascimento, Integer nivelDeAcesso, Cargo cargo) {
+        super(nome, email, salario, dataAdmissao, status, cpf, dataNascimento, cargo);
         this.nivelDeAcesso = nivelDeAcesso;
 
     }

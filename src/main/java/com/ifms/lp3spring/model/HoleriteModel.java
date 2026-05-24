@@ -35,7 +35,6 @@ public class HoleriteModel {
    
     private Double salarioLiquido;
 
-    @FutureOrPresent(message = "A data de pagamento deve ser no presente ou no futuro")
     private LocalDate dataPagamento;
 
     @ManyToOne

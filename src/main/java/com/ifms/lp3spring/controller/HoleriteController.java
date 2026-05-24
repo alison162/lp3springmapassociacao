@@ -44,7 +44,7 @@ public class HoleriteController {
             return new ModelAndView("holerite/salvarholerite");
         }
         holeriteService.inserir(holerite);
-        return new ModelAndView("redirect:/buscarholerite");
+        return new ModelAndView("redirect:/manterholerite");
     }*/
 
     @PostMapping("/salvarholerite")
@@ -62,7 +62,7 @@ public class HoleriteController {
         holerite.setFuncionario(funcionario);
 
         holeriteService.inserir(holerite);
-        return new ModelAndView("redirect:/salvarholerite");
+        return new ModelAndView("redirect:/manterholerite");
     }
 
     @GetMapping("/editarholerite/{id}")

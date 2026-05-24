@@ -33,12 +33,20 @@
                     <td th:text="${holerite.funcionario.nome}"></td>
                     <td th:text="${holerite.funcionario.cpf}"></td>
                     <td th:text="${holerite.mesReferencia}"></td>
-                    <td th:text="${holerite.salarioBase}"></td>
-                    <td th:text="${holerite.salarioLiquido}"></td>
+                    <td th:text="'R$ ' + ${#numbers.formatDecimal(holerite.salarioBase, 2, 2)}"></td>
+                    <td th:text="'R$ ' + ${#numbers.formatDecimal(holerite.salarioLiquido, 2, 2)}"></td>
                     <td th:text="${holerite.dataPagamento}"></td>
                     <td>
-                        <a th:href="@{/editarholerite/{id}(id=${holerite.idHolerite})}">Editar</a> |
-                        <a th:href="@{/removerholerite/{id}(id=${holerite.idHolerite})}">Remover</a>
+                        <form th:action="@{/editarholerite/{id}(id=${holerite.idHolerite})}" method="get"
+                            onsubmit="return confirm('Deseja realmente editar este holerite?');">
+                            <button type="submit" class="btn btn-warning">Editar</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/removerholerite/{id}(id=${holerite.idHolerite})}" method="get"
+                            onsubmit="return confirm('Deseja realmente remover este holerite?');">
+                            <button type="submit" class="btn btn-danger">Remover</button>
+                        </form>
                     </td>
                 </tr>
 

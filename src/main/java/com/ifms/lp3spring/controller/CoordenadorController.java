@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ifms.lp3spring.Service.CoordenadorService;
 import com.ifms.lp3spring.Service.DepartamentoService;
+import com.ifms.lp3spring.model.Cargo;
 import com.ifms.lp3spring.model.CoordenadorModel;
 
 import jakarta.validation.Valid;
@@ -39,6 +40,8 @@ public class CoordenadorController {
             mv.addObject("departamentos", departamentoService.buscarTodos());
             return mv;
         }
+        
+        coordenador.setCargo(Cargo.COORDENADOR);
         coordenadorService.inserir(coordenador);
         return new ModelAndView("redirect:/mantercoordenador");
     }
