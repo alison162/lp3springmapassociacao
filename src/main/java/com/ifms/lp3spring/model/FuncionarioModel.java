@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -16,7 +15,7 @@ import jakarta.persistence.InheritanceType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Positive;
+
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
@@ -38,8 +37,6 @@ public abstract class FuncionarioModel {
     @Email
     private String email;
 
-    @Positive
-    private Double salario;
 
     @PastOrPresent
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -48,7 +45,7 @@ public abstract class FuncionarioModel {
     private String status;
 
     @Enumerated(EnumType.STRING)
-    private Cargo cargo; // novo campo
+    private Cargo cargo; 
 
     public FuncionarioModel() {
     }
@@ -75,14 +72,6 @@ public abstract class FuncionarioModel {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Double getSalario() {
-        return salario;
-    }
-
-    public void setSalario(Double salario) {
-        this.salario = salario;
     }
 
     public LocalDate getDataAdmissao() {
@@ -130,11 +119,10 @@ public abstract class FuncionarioModel {
     }
 
     
-    public FuncionarioModel(String nome, String email, Double salario, LocalDate dataAdmissao, String status,
+    public FuncionarioModel(String nome, String email, LocalDate dataAdmissao, String status,
             String cpf, LocalDate dataNascimento, Cargo cargo) {
         this.nome = nome;
         this.email = email;
-        this.salario = salario;
         this.dataAdmissao = dataAdmissao;
         this.status = status;
         this.cpf = cpf;

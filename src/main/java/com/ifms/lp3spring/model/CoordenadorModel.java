@@ -25,9 +25,9 @@ public class CoordenadorModel extends FuncionarioModel {
     public CoordenadorModel() {
     }
 
-    public CoordenadorModel(String nome, String email, Double salario, LocalDate dataAdmissao, String status,
+    public CoordenadorModel(String nome, String email, LocalDate dataAdmissao, String status,
             Integer cargaHoraria, String observacoes, String cpf, LocalDate dataNascimento, Cargo cargo) {
-        super(nome, email, salario, dataAdmissao, status, cpf, dataNascimento, cargo);
+        super(nome, email, dataAdmissao, status, cpf, dataNascimento, cargo);
         this.cargaHoraria = cargaHoraria;
         this.observacoes = observacoes;
 

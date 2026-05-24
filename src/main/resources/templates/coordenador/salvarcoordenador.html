@@ -38,13 +38,6 @@
         <div class="text-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
     </div>
 
-    <!-- Salário -->
-    <div class="col-md-6">
-        <label for="salario" class="form-label">Salário</label>
-        <input type="number" step="0.01" class="form-control" th:field="*{salario}">
-        <div class="text-danger" th:if="${#fields.hasErrors('salario')}" th:errors="*{salario}"></div>
-    </div>
-
     <!-- Data de Admissão -->
     <div class="col-md-6">
         <label for="dataAdmissao" class="form-label">Data de Admissão</label>
