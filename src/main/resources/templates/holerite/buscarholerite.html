@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layoutprincipal.html}">
+
+<head>
+    <title>Manter Holerite</title>
+</head>
+
+<body>
+    <div class=" container" layout:fragment="conteudoprincipal">
+        <div class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis" style="background-color: #E9F1FA">
+            <div class="col-lg-6 px-0">
+                <h1 class="display-4 fst-italic">Manter Holerite</h1>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th>Funcionário</th>
+                    <th>CPF</th>
+                    <th>Mês Referência</th>
+                    <th>Salário Base</th>
+                    <th>Salário Líquido</th>
+                    <th>Data Pagamento</th>
+                    <th>Ações</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="holerite : ${holerites}">
+                    <th scope="row"><span th:text="${holerite.idHolerite}"></span></th>
+                    <td th:text="${holerite.funcionario.nome}"></td>
+                    <td th:text="${holerite.funcionario.cpf}"></td>
+                    <td th:text="${holerite.mesReferencia}"></td>
+                    <td th:text="${holerite.salarioBase}"></td>
+                    <td th:text="${holerite.salarioLiquido}"></td>
+                    <td th:text="${holerite.dataPagamento}"></td>
+                    <td>
+                        <a th:href="@{/editarholerite/{id}(id=${holerite.idHolerite})}">Editar</a> |
+                        <a th:href="@{/removerholerite/{id}(id=${holerite.idHolerite})}">Remover</a>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    </div>
+</body>
+
+</html>

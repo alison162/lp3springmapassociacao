@@ -1,0 +1,53 @@
+package com.ifms.lp3spring.Service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ifms.lp3spring.model.FuncionarioModel;
+import com.ifms.lp3spring.Repository.FuncionarioRepository;
+
+@Service
+public class FuncionarioService {
+
+    @Autowired
+    private FuncionarioRepository funcionarioRepository;
+
+    // Inserir funcionário
+    public String inserir(FuncionarioModel funcionario) {
+        try {
+            funcionarioRepository.save(funcionario);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+        return "Funcionário salvo com sucesso!";
+    }
+
+    // Buscar todos
+    public List<FuncionarioModel> buscarTodos() {
+        return funcionarioRepository.findAll();
+    }
+
+    // Buscar por ID
+    public FuncionarioModel buscarPorId(Long id) {
+        return funcionarioRepository.findById(id).orElse(null);
+    }
+
+    // Remover
+    public void remover(Long id) {
+        funcionarioRepository.deleteById(id);
+    }
+
+    // Atualizar
+    public String atualizar(FuncionarioModel funcionario) {
+        try {
+            funcionarioRepository.save(funcionario);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+        return "Funcionário atualizado com sucesso!";
+    }
+}
