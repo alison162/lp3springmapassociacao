@@ -49,7 +49,7 @@ public class CoordenadorController {
     // Listar todos
     @GetMapping("/mantercoordenador")
     public ModelAndView buscar() {
-        return new ModelAndView("coordenador/buscarcoordenador", "coordenadores", coordenadorService.buscarTodos());
+        return new ModelAndView("coordenador/buscarcoordenador", "coordenadores", coordenadorService.buscarTodosOrdenadosPorNome());
     }
 
     // Editar coordenador

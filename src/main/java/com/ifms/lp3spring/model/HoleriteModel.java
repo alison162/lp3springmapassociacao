@@ -2,6 +2,9 @@ package com.ifms.lp3spring.model;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.Collate;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,6 +37,8 @@ public class HoleriteModel {
    
     private Double salarioLiquido;
 
+    @NotNull(message = "A data de pagamento é obrigatória")
+    @Column(name = "data_pagamento")
     private LocalDate dataPagamento;
 
     @ManyToOne

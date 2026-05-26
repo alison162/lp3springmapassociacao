@@ -1,10 +1,11 @@
 package com.ifms.lp3spring.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.ifms.lp3spring.Comparator.FuncionarioNome;
 import com.ifms.lp3spring.model.FuncionarioModel;
 import com.ifms.lp3spring.Repository.FuncionarioRepository;
 
@@ -35,6 +36,11 @@ public class FuncionarioService {
         return funcionarioRepository.findById(id).orElse(null);
     }
 
+     public List<FuncionarioModel> buscarTodosOrdenadosPorNome() {
+        List<FuncionarioModel> funcionarios = funcionarioRepository.findAll();
+        Collections.sort(funcionarios, new FuncionarioNome());
+        return funcionarios;
+    }
     // Remover
     public void remover(Long id) {
         funcionarioRepository.deleteById(id);

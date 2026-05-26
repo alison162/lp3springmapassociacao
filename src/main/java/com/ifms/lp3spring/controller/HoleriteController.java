@@ -36,17 +36,6 @@ public class HoleriteController {
         return mv;
     }
 
-    // Salva o holerite
-    /*@PostMapping("/salvarholerite")
-    public ModelAndView salvar(@Valid @ModelAttribute("holerite") HoleriteModel holerite,
-            BindingResult result) {
-        if (result.hasErrors()) {
-            return new ModelAndView("holerite/salvarholerite");
-        }
-        holeriteService.inserir(holerite);
-        return new ModelAndView("redirect:/manterholerite");
-    }*/
-
     @PostMapping("/salvarholerite")
     public ModelAndView salvar(@Valid @ModelAttribute("holerite") HoleriteModel holerite,
             BindingResult result,
@@ -78,6 +67,6 @@ public class HoleriteController {
     @GetMapping("/removerholerite/{id}")
     public String remover(@PathVariable("id") Long id) {
         holeriteService.remover(id);
-        return "redirect:/buscarholerite";
+        return "redirect:/manterholerite";
     }
 }

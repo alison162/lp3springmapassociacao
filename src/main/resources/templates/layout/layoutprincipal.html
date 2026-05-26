@@ -12,10 +12,13 @@
 
 <body>
     <!-----------------Menu da aplicação------------------------------------------------------------------------------>
-    <nav class="navbar navbar-expand-lg" , style="background-color: #00ABE4;">
+    <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" target="_blank" href="/principal">
-                <img th:src="@{/imagens/logo.png}" height="10%" width="10%" alt="Logo da instituição do RH"></a>
+                <img th:src="@{/imagens/logo.png}" alt="Logo da instituição do RH" class="d-inline-block align-text-top"
+                    style="height: 60px;">
+            </a>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -25,9 +28,6 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/home">Principal</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -85,15 +85,7 @@
                             <li><a class="dropdown-item" href="#">Configurações</a></li>
                         </ul>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                    </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
@@ -105,8 +97,8 @@
     </div>
 
     <!------------------------------------------------------------------------------------------------------------------>
-    <footer class="bg-body-tertiary py-3 mt-5 border-top">
-        <div class="container">
+    <footer class="py-3 mt-5 border-top bg-primary text-center">
+        <div class="container" >
             <p>© 2017–2026 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
         </div>
     </footer>

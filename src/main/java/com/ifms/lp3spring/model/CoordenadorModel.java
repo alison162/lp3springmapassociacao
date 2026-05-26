@@ -1,8 +1,13 @@
 package com.ifms.lp3spring.model;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
@@ -13,14 +18,16 @@ import jakarta.validation.constraints.Size;
 @Table(name = "coordenador")
 public class CoordenadorModel extends FuncionarioModel {
 
+    @Column(name = "carga_horaria")
     @Min(value = 1, message = "Carga horária deve ser no mínimo 1 hora")
     private Integer cargaHoraria;
 
+    @Column(name = "observacoes")
     @Size(max = 255, message = "Observações não podem exceder 255 caracteres")
     private String observacoes;
 
-    @ManyToOne
-    private DepartamentoModel departamento;
+    @OneToMany(mappedBy = "coordenador")
+    private List<DepartamentoModel> departamentos;
 
     public CoordenadorModel() {
     }
@@ -49,12 +56,12 @@ public class CoordenadorModel extends FuncionarioModel {
         this.observacoes = observacoes;
     }
 
-    public DepartamentoModel getDepartamento() {
-        return departamento;
+    public List<DepartamentoModel> getDepartamentos() {
+        return departamentos;
     }
 
-    public void setDepartamento(DepartamentoModel departamento) {
-        this.departamento = departamento;
+    public void setDepartamentos(List<DepartamentoModel> departamentos) {
+        this.departamentos = departamentos;
     }
 
 }

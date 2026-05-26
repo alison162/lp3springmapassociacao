@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,7 +17,9 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Pattern;
 
 
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -24,24 +29,33 @@ public abstract class FuncionarioModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @Column(name = "nome", nullable = false, length = 80)
+    @NotBlank(message = "O nome do funcionário é obrigatório")
     private String nome;
 
-    @NotBlank
+    @Column(name = "cpf", unique = true, nullable = false, length = 11)
+    @NotBlank(message = "O CPF do funcionário é obrigatório")
+    @Pattern(regexp = "\\d{11}", message = "O CPF deve conter exatamente 11 dígitos numéricos sem pontos ou traços")
     private String cpf;
 
-    @PastOrPresent
+    @Column(name = "data_nascimento")
+    @Past(message = "A data de nascimento deve ser no passado")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     protected LocalDate dataNascimento;
 
-    @Email
+    @Column(name = "email", unique = true, nullable = false, length = 100)
+    @Email(message = "O email do funcionário é obrigatório")
     private String email;
 
 
-    @PastOrPresent
+    
+    @Column(name = "data_admissao")
+    @PastOrPresent(message = "A data de admissão deve ser no passado ou presente")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataAdmissao;
 
+    @Column(nullable = false)
+    @NotBlank(message = "O status do funcionário é obrigatório")
     private String status;
 
     @Enumerated(EnumType.STRING)

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,24 +39,26 @@ public class GerenteController {
 
     @GetMapping("/mantergerente")
     public ModelAndView buscar() {
-        return new ModelAndView("gerente/buscargerente", "gerentes", gerenteService.buscarTodos());
+        return new ModelAndView("gerente/buscargerente", "gerentes", gerenteService.buscarTodosOrdenadosPorNome());
     }
 
     @GetMapping("/removergerente/{id}")
-    public String deletar(@ModelAttribute("id") Long id) {
+    public String deletar(@PathVariable("id") Long id) {
         gerenteService.remover(id);
         return "redirect:/mantergerente";
     }
 
     @GetMapping("/salvargerente/{id}")
-    public ModelAndView buscarPorId(@ModelAttribute("id") Long id) {
+    public ModelAndView buscarPorId(@PathVariable("id") Long id) {
         GerenteModel gerente = gerenteService.buscarPorId(id);
         if (gerente==null) {
             gerente = new GerenteModel();
         }
         gerente.setCargo(Cargo.GERENTE);
-        return new ModelAndView("/gerente/salvargerente", "gerente", gerente);
+        return new ModelAndView("gerente/salvargerente", "gerente", gerente);
     }
+
+    
 
     public GerenteService getGerenteService() {
         return gerenteService;

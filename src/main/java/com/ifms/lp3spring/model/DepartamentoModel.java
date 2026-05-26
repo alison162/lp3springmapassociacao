@@ -13,8 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -25,6 +25,7 @@ public class DepartamentoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDepartamento;
 
+   
     @NotBlank(message = "O nome do departamento é obrigatório")
     @Size(min = 3, max = 80)
     @Column(name= "nome_departamento", nullable = false, length = 80)
@@ -35,8 +36,9 @@ public class DepartamentoModel {
     @Fetch(FetchMode.JOIN)
     private GerenteModel gerente;
 
-    @OneToMany(mappedBy = "departamento")
-    private List<CoordenadorModel> coordenadores;
+    @ManyToOne
+    @JoinColumn(name = "id_coordenador")
+    private CoordenadorModel coordenador;
 
     public DepartamentoModel() {
     }
@@ -69,12 +71,12 @@ public class DepartamentoModel {
         this.gerente = gerente;
     }
 
-    public List<CoordenadorModel> getCoordenadores() {
-        return coordenadores;
+    public CoordenadorModel getCoordenador() {
+        return coordenador;
     }
 
-    public void setCoordenadores(List<CoordenadorModel> coordenadores) {
-        this.coordenadores = coordenadores;
+    public void setCoordenador(CoordenadorModel coordenador) {
+        this.coordenador = coordenador;
     }
 
 }

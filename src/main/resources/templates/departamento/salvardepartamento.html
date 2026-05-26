@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layoutprincipal.html}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layoutprincipal.html}">
 
 <head>
     <title>Salvar Departamento</title>
@@ -9,67 +8,76 @@
 
 <body>
 
-<div class="container"
-     layout:fragment="conteudoprincipal">
+    <div class="container" layout:fragment="conteudoprincipal">
 
-    <div class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis"
-         style="background-color: #E9F1FA;">
+        <div class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis" style="background-color: #E9F1FA;">
 
-        <div class="col-lg-6 px-0">
+            <div class="col-lg-6 px-0">
 
-            <h1 class="display-4 fst-italic">
-                Salvar Departamento
-            </h1>
+                <h1 class="display-4 fst-italic">
+                    Salvar Departamento
+                </h1>
 
-            <p class="lead my-3">
-                Preencha os dados do Departamento.
-            </p>
-
-        </div>
-
-    </div>
-
-    <form th:action="@{/salvardepartamento}"
-          th:object="${departamento}"
-          method="post">
-
-        <div class="row mb-3">
-
-            <div class="col-md-8">
-
-                <label for="inputnome"
-                       class="form-label">
-                    Nome
-                </label>
-
-                <input type="text"
-                       class="form-control"
-                       id="inputnome"
-                       th:field="*{nome}">
-
-                <ul>
-                    <li th:each="error : ${#fields.errors('nome')}"
-                        th:text="${error}"
-                        class="text-danger">
-                    </li>
-                </ul>
+                <p class="lead my-3">
+                    Preencha os dados do Departamento.
+                </p>
 
             </div>
 
         </div>
 
-        <div class="col-md-12 mt-4">
+        <form th:action="@{/salvardepartamento}" th:object="${departamento}" method="post">
 
-            <button type="submit"
-                    class="btn btn-primary">
-                Salvar
-            </button>
+            <input type="hidden" th:field="*{idDepartamento}" />
 
-        </div>
+            <div class="row mb-3">
 
-    </form>
+                <div class="col-4">
 
-</div>
+                    <label for="inputnome" class="form-label">
+                        Nome
+                    </label>
+
+                    <input type="text" class="form-control" id="inputnome" th:field="*{nome}">
+
+                    <ul>
+                        <li th:each="error : ${#fields.errors('nome')}" th:text="${error}" class="text-danger">
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-4">
+                    <label for="gerente" class="form-label">Gerente</label>
+                    <select th:field="*{gerente}" class="form-select">
+                        <option th:each="g : ${gerentes}" th:value="${g.id}" th:text="${g.nome}"></option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label for="coordenador" class="form-label">Coordenador</label>
+                    <select th:field="*{coordenador}" class="form-select">
+                        <option th:each="c : ${coordenadores}" th:value="${c.id}" th:text="${c.nome}">
+                        </option>
+                    </select>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="col-md-12 mt-4">
+
+                <button type="submit" class="btn btn-primary">
+                    Salvar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
 
 </body>
+
 </html>

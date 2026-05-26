@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ifms.lp3spring.Repository.CoordenadorRepository;
 import com.ifms.lp3spring.model.CoordenadorModel;
+import com.ifms.lp3spring.model.GerenteModel;
 
 
 
@@ -39,6 +40,12 @@ public class CoordenadorService {
         return coordenadorRepository.findById(id).orElse(null);
     }
 
+
+    public List<CoordenadorModel> buscarTodosOrdenadosPorNome() {
+        List<CoordenadorModel> coordenadores = coordenadorRepository.findAll();
+        coordenadores.sort((c1, c2) -> c1.getNome().compareToIgnoreCase(c2.getNome()));
+        return coordenadores;
+    }
 
     public CoordenadorRepository getCoordenadorRepository() {
         return coordenadorRepository;

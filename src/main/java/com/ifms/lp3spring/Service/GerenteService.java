@@ -26,6 +26,12 @@ public class GerenteService {
         return gerenteRepository.findAll();
     }
 
+    public List<GerenteModel> buscarTodosOrdenadosPorNome() {
+        List<GerenteModel> gerentes = gerenteRepository.findAll();
+        gerentes.sort((g1, g2) -> g1.getNome().compareToIgnoreCase(g2.getNome()));
+        return gerentes;
+    }
+
     public String remover(Long id) {
         try {
             gerenteRepository.deleteById(id);
