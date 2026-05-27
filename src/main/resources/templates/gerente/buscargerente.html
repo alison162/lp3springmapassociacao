@@ -40,7 +40,7 @@
                         </form>
                     </td>
                     <td>
-                        <form th:action="@{/removergerente/{id}(id=${gerente.id})}" method="get"
+                        <form th:action="@{removergerente/{id}(id=${gerente.id})}" method="get"
                             onsubmit="return confirm('Deseja realmente remover este gerente?');">
                             <button type="submit" class="btn btn-danger">Remover</button>
                         </form>
