@@ -3,6 +3,8 @@ package com.ifms.lp3spring.Service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.ifms.lp3spring.Comparator.FuncionarioNome;
 import com.ifms.lp3spring.Repository.CoordenadorRepository;
 import com.ifms.lp3spring.model.CoordenadorModel;
 
@@ -37,7 +39,7 @@ public class CoordenadorService {
 
     public List<CoordenadorModel> buscarTodosOrdenadosPorNome() {
         List<CoordenadorModel> coordenadores = coordenadorRepository.findAll();
-        coordenadores.sort((c1, c2) -> c1.getNome().compareToIgnoreCase(c2.getNome()));
+        coordenadores.sort(new FuncionarioNome());
         return coordenadores;
     }
 

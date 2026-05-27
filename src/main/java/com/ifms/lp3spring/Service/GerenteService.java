@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ifms.lp3spring.Comparator.FuncionarioNome;
 import com.ifms.lp3spring.Repository.GerenteRepository;
+import com.ifms.lp3spring.model.CoordenadorModel;
 import com.ifms.lp3spring.model.GerenteModel;
 
 @Service
@@ -26,9 +28,9 @@ public class GerenteService {
         return gerenteRepository.findAll();
     }
 
-    public List<GerenteModel> buscarTodosOrdenadosPorNome() {
+      public List<GerenteModel> buscarTodosOrdenadosPorNome() {
         List<GerenteModel> gerentes = gerenteRepository.findAll();
-        gerentes.sort((g1, g2) -> g1.getNome().compareToIgnoreCase(g2.getNome()));
+        gerentes.sort(new FuncionarioNome());
         return gerentes;
     }
 
