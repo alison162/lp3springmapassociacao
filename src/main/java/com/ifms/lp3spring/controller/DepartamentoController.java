@@ -12,10 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ifms.lp3spring.Service.CoordenadorService;
 import com.ifms.lp3spring.Service.DepartamentoService;
-import com.ifms.lp3spring.Service.FuncionarioService;
 import com.ifms.lp3spring.Service.GerenteService;
 import com.ifms.lp3spring.model.DepartamentoModel;
-import com.ifms.lp3spring.model.HoleriteModel;
 
 import jakarta.validation.Valid;
 
@@ -24,9 +22,6 @@ public class DepartamentoController {
 
     @Autowired
     private DepartamentoService departamentoService;
-
-    @Autowired
-    private FuncionarioService funcionarioService;
 
     @Autowired
     private GerenteService gerenteService;
@@ -51,11 +46,9 @@ public class DepartamentoController {
         }
 
         departamentoService.inserir(departamento);
-        // igual ao DisciplinaController, redireciona para o próprio formulário
         return "redirect:/salvardepartamento";
     }
 
-    // Listar todos
     @GetMapping("/manterdepartamento")
     public ModelAndView buscar() {
         return new ModelAndView("departamento/buscardepartamento", "departamentos", departamentoService.buscarTodos());
@@ -66,7 +59,10 @@ public class DepartamentoController {
         DepartamentoModel departamento = departamentoService.buscarPorId(id);
         ModelAndView mv = new ModelAndView("departamento/salvardepartamento");
         mv.addObject("departamento", departamento);
-        mv.addObject("funcionarios", funcionarioService.buscarTodos());
+
+        mv.addObject("gerentes", gerenteService.buscarTodos());
+
+        mv.addObject("coordenadores", coordenadorService.buscarTodos());
         return mv;
     }
 

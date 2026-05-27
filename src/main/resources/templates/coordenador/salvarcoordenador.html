@@ -63,6 +63,22 @@
                     </select>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-3">
+                    <label for="cargaHoraria" class="form-label">Carga Horária</label>
+                    <input type="text" class="form-control" th:field="*{cargaHoraria}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('cargaHoraria')}"
+                        th:errors="*{cargaHoraria}">
+                    </div>
+                </div>
+                <div class="col-9">
+                    <label for="observacoes" class="form-label">Observações</label>
+                    <input type="text" class="form-control" th:field="*{observacoes}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('observacoes')}"
+                        th:errors="*{observacoes}">
+                    </div>
+                </div>
+            </div>
 
 
             <div class="col-12">

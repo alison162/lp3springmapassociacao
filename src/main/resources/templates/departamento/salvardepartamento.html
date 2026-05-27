@@ -27,22 +27,13 @@
         </div>
 
         <form th:action="@{/salvardepartamento}" th:object="${departamento}" method="post">
-
             <input type="hidden" th:field="*{idDepartamento}" />
-
             <div class="row mb-3">
-
                 <div class="col-4">
-
-                    <label for="inputnome" class="form-label">
-                        Nome
-                    </label>
-
+                    <label for="inputnome" class="form-label"> Nome</label>
                     <input type="text" class="form-control" id="inputnome" th:field="*{nome}">
-
                     <ul>
-                        <li th:each="error : ${#fields.errors('nome')}" th:text="${error}" class="text-danger">
-                        </li>
+                        <li th:each="error : ${#fields.errors('nome')}" th:text="${error}" class="text-danger"></li>
                     </ul>
                 </div>
                 <div class="col-4">

@@ -2,10 +2,8 @@ package com.ifms.lp3spring.model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,12 +13,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
-
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
@@ -47,8 +45,6 @@ public abstract class FuncionarioModel {
     @Email(message = "O email do funcionário é obrigatório")
     private String email;
 
-
-    
     @Column(name = "data_admissao")
     @PastOrPresent(message = "A data de admissão deve ser no passado ou presente")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -59,7 +55,10 @@ public abstract class FuncionarioModel {
     private String status;
 
     @Enumerated(EnumType.STRING)
-    private Cargo cargo; 
+    private Cargo cargo;
+
+    @OneToMany(mappedBy = "funcionario")
+    private List<HoleriteModel> holerites;
 
     public FuncionarioModel() {
     }
@@ -132,7 +131,14 @@ public abstract class FuncionarioModel {
         this.cargo = cargo;
     }
 
-    
+    public List<HoleriteModel> getHolerites() {
+        return holerites;
+    }
+
+    public void setHolerites(List<HoleriteModel> holerites) {
+        this.holerites = holerites;
+    }
+
     public FuncionarioModel(String nome, String email, LocalDate dataAdmissao, String status,
             String cpf, LocalDate dataNascimento, Cargo cargo) {
         this.nome = nome;
@@ -143,7 +149,5 @@ public abstract class FuncionarioModel {
         this.dataNascimento = dataNascimento;
         this.cargo = cargo;
     }
-
-    
 
 }

@@ -23,7 +23,7 @@ public class HoleriteService {
 
     public String inserir (HoleriteModel holerite) {
       try {
-            // Pega o cargo do funcionário associado ao holerite
+     
             FuncionarioModel funcionario = holerite.getFuncionario();
             CalculoSalario strategy;
 
@@ -35,11 +35,10 @@ public class HoleriteService {
                 throw new IllegalArgumentException("Cargo não suportado: " + funcionario.getCargo());
             }
 
-            // Calcula salário líquido
             double salarioLiquido = strategy.calcular(holerite);
             holerite.setSalarioLiquido(salarioLiquido);
 
-            // Salva no banco
+     
             holeriteRepository.save(holerite);
 
         } catch (Exception e) {

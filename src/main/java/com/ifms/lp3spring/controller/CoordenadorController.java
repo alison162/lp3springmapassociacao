@@ -22,7 +22,7 @@ public class CoordenadorController {
     @Autowired
     private DepartamentoService departamentoService;
 
-    // GET para abrir formulário
+
     @GetMapping("/salvarcoordenador")
     public ModelAndView getSalvar() {
         ModelAndView mv = new ModelAndView("coordenador/salvarcoordenador");
@@ -31,7 +31,7 @@ public class CoordenadorController {
         return mv;
     }
 
-    // POST para salvar
+
     @PostMapping("/salvarcoordenador")
     public ModelAndView salvar(@Valid @ModelAttribute("coordenador") CoordenadorModel coordenador,
             BindingResult result) {
@@ -46,13 +46,13 @@ public class CoordenadorController {
         return new ModelAndView("redirect:/mantercoordenador");
     }
 
-    // Listar todos
+
     @GetMapping("/mantercoordenador")
     public ModelAndView buscar() {
         return new ModelAndView("coordenador/buscarcoordenador", "coordenadores", coordenadorService.buscarTodosOrdenadosPorNome());
     }
 
-    // Editar coordenador
+
     @GetMapping("/editarcoordenador/{id}")
     public ModelAndView editar(@PathVariable("id") Long id) {
         CoordenadorModel coord = coordenadorService.buscarPorId(id);
@@ -62,7 +62,7 @@ public class CoordenadorController {
         return mv;
     }
 
-    // Remover coordenador
+
     @GetMapping("/removercoordenador/{id}")
     public String remover(@PathVariable("id") Long id) {
         coordenadorService.remover(id);

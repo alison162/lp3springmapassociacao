@@ -30,8 +30,10 @@ public class HoleriteModel {
     @Positive(message = "O ano de referência deve ser um número positivo")
     private Double salarioBase;
 
+    @Positive(message = "O ano de referência deve ser um número positivo")
     private Double descontos;
-
+    
+    @Positive(message = "O ano de referência deve ser um número positivo")
     private Double beneficios;
 
    

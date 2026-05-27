@@ -15,7 +15,7 @@ public class FuncionarioService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
-    // Inserir funcionário
+
     public String inserir(FuncionarioModel funcionario) {
         try {
             funcionarioRepository.save(funcionario);
@@ -26,12 +26,12 @@ public class FuncionarioService {
         return "Funcionário salvo com sucesso!";
     }
 
-    // Buscar todos
+
     public List<FuncionarioModel> buscarTodos() {
         return funcionarioRepository.findAll();
     }
 
-    // Buscar por ID
+ 
     public FuncionarioModel buscarPorId(Long id) {
         return funcionarioRepository.findById(id).orElse(null);
     }
@@ -41,12 +41,12 @@ public class FuncionarioService {
         Collections.sort(funcionarios, new FuncionarioNome());
         return funcionarios;
     }
-    // Remover
+ 
     public void remover(Long id) {
         funcionarioRepository.deleteById(id);
     }
 
-    // Atualizar
+
     public String atualizar(FuncionarioModel funcionario) {
         try {
             funcionarioRepository.save(funcionario);

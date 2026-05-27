@@ -22,7 +22,6 @@ public class HoleriteController {
     @Autowired
     private FuncionarioService funcionarioService;
 
-    // Listar todos
     @GetMapping("/manterholerite")
     public ModelAndView buscar() {
         return new ModelAndView("holerite/buscarholerite", "holerites", holeriteService.buscarTodos());
@@ -46,7 +45,7 @@ public class HoleriteController {
             return mv;
         }
 
-        // Busca o funcionário pelo id e seta no holerite
+    
         FuncionarioModel funcionario = funcionarioService.buscarPorId(funcionarioId);
         holerite.setFuncionario(funcionario);
 
@@ -59,11 +58,11 @@ public class HoleriteController {
         HoleriteModel holerite = holeriteService.buscarPorId(id);
         ModelAndView mv = new ModelAndView("holerite/salvarholerite");
         mv.addObject("holerite", holerite);
-        mv.addObject("funcionarios", funcionarioService.buscarTodos()); // importante
+        mv.addObject("funcionarios", funcionarioService.buscarTodos()); 
         return mv;
     }
 
-    // Remover holerite
+
     @GetMapping("/removerholerite/{id}")
     public String remover(@PathVariable("id") Long id) {
         holeriteService.remover(id);

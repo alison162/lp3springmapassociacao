@@ -1,28 +1,23 @@
 package com.ifms.lp3spring.Service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ifms.lp3spring.Repository.CoordenadorRepository;
 import com.ifms.lp3spring.model.CoordenadorModel;
-import com.ifms.lp3spring.model.GerenteModel;
-
-
 
 @Service
 public class CoordenadorService {
-     @Autowired
+    @Autowired
     private CoordenadorRepository coordenadorRepository;
 
-    public void inserir (CoordenadorModel coordenador) {
+    public void inserir(CoordenadorModel coordenador) {
         try {
             coordenadorRepository.save(coordenador);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
-    
 
     public List<CoordenadorModel> buscarTodos() {
         return coordenadorRepository.findAll();
@@ -35,11 +30,10 @@ public class CoordenadorService {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
-    
+
     public CoordenadorModel buscarPorId(Long id) {
         return coordenadorRepository.findById(id).orElse(null);
     }
-
 
     public List<CoordenadorModel> buscarTodosOrdenadosPorNome() {
         List<CoordenadorModel> coordenadores = coordenadorRepository.findAll();
