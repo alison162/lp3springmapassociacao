@@ -3,7 +3,6 @@ package com.ifms.lp3spring.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
@@ -19,7 +18,7 @@ public class GerenteModel extends FuncionarioModel {
     @Min(value = 1, message = "Nível de acesso deve ser no mínimo 1")
     private Integer nivelDeAcesso;
 
-    @OneToMany(mappedBy = "gerente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "gerente", fetch = FetchType.LAZY)
     private List<DepartamentoModel> departamentos;
 
     public GerenteModel() {
