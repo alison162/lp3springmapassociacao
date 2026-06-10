@@ -5,7 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.dao.DataIntegrityViolationException;
 import com.ifms.lp3spring.Service.CoordenadorService;
 import com.ifms.lp3spring.Service.DepartamentoService;
 import com.ifms.lp3spring.model.Cargo;
@@ -62,12 +63,35 @@ public class CoordenadorController {
         return mv;
     }
 
+@GetMapping("/removercoordenador/{id}")
+public String remover(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 
-    @GetMapping("/removercoordenador/{id}")
-    public String remover(@PathVariable("id") Long id) {
+    try {
+
         coordenadorService.remover(id);
-        return "redirect:/mantercoordenador";
+
+        redirectAttributes.addFlashAttribute(
+                "sucesso",
+                "Coordenador removido com sucesso!"
+        );
+
+    } catch (DataIntegrityViolationException e) {
+
+        redirectAttributes.addFlashAttribute(
+                "erro",
+                "Não é possível excluir este coordenador pois ele está vinculado a um relacionamento."
+        );
+
+    } catch (Exception e) {
+
+        redirectAttributes.addFlashAttribute(
+                "erro",
+                "Erro ao remover coordenador."
+        );
     }
+
+    return "redirect:/mantercoordenador";
+}
 
     public CoordenadorService getCoordenadorService() {
         return coordenadorService;

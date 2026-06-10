@@ -26,12 +26,9 @@ public class CoordenadorService {
     }
 
     public void remover(Long id) {
-        try {
             coordenadorRepository.deleteById(id);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage(), e);
         }
-    }
+
 
     public CoordenadorModel buscarPorId(Long id) {
         return coordenadorRepository.findById(id).orElse(null);

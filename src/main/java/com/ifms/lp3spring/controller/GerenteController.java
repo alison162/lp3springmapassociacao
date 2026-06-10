@@ -1,6 +1,7 @@
 package com.ifms.lp3spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ifms.lp3spring.Service.GerenteService;
 import com.ifms.lp3spring.model.Cargo;
@@ -42,11 +44,36 @@ public class GerenteController {
         return new ModelAndView("gerente/buscargerente", "gerentes", gerenteService.buscarTodosOrdenadosPorNome());
     }
 
-    @GetMapping("/removergerente/{id}")
-    public String deletar(@PathVariable("id") Long id) {
+    
+@GetMapping("/removergerente/{id}")
+public String remover(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+
+    try {
+
         gerenteService.remover(id);
-        return "redirect:/mantergerente";
+
+        redirectAttributes.addFlashAttribute(
+                "sucesso",
+                "Gerente removido com sucesso!"
+        );
+
+    } catch (DataIntegrityViolationException e) {
+
+        redirectAttributes.addFlashAttribute(
+                "erro",
+                "Não é possível excluir este gerente pois ele está vinculado a um relacionamento."
+        );
+
+    } catch (Exception e) {
+
+        redirectAttributes.addFlashAttribute(
+                "erro",
+                "Erro ao remover gerente."
+        );
     }
+
+    return "redirect:/mantergerente";
+}
 
     @GetMapping("/salvargerente/{id}")
     public ModelAndView buscarPorId(@PathVariable("id") Long id) {

@@ -34,14 +34,11 @@ public class GerenteService {
         return gerentes;
     }
 
-    public String remover(Long id) {
-        try {
+    public void remover(Long id) {
+
             gerenteRepository.deleteById(id);
-        } catch (Exception e) {
-            return e.getMessage();
+            
         }
-        return "Removido com Sucesso";
-    }
     
     public GerenteModel buscarPorId(Long id) {
         return gerenteRepository.findById(id).orElse(null);
