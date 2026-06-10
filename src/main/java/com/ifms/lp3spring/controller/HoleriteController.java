@@ -1,10 +1,12 @@
 package com.ifms.lp3spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ifms.lp3spring.Service.HoleriteService;
 import com.ifms.lp3spring.Service.FuncionarioService;
@@ -62,10 +64,34 @@ public class HoleriteController {
         return mv;
     }
 
+@GetMapping("/removerholerite/{id}")
+public String remover(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 
-    @GetMapping("/removerholerite/{id}")
-    public String remover(@PathVariable("id") Long id) {
+    try {
+
         holeriteService.remover(id);
-        return "redirect:/manterholerite";
+
+        redirectAttributes.addFlashAttribute(
+                "sucesso",
+                "Holerite removido com sucesso!"
+        );
+
+    } catch (DataIntegrityViolationException e) {
+
+        redirectAttributes.addFlashAttribute(
+                "erro",
+                "Não é possível excluir este holerite pois ele está vinculado a um relacionamento."
+        );
+
+    } catch (Exception e) {
+
+        redirectAttributes.addFlashAttribute(
+                "erro",
+                "Erro ao remover holerite."
+        );
     }
+
+    return "redirect:/manterholerite";
+}
+
 }

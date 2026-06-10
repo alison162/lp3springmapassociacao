@@ -12,7 +12,7 @@ public class DepartamentoService {
     @Autowired
     private DepartamentoRepository departamentoRepository;
 
-    public String inserir (DepartamentoModel departamento) {
+    public String inserir(DepartamentoModel departamento) {
         try {
             departamentoRepository.save(departamento);
         } catch (Exception e) {
@@ -26,18 +26,27 @@ public class DepartamentoService {
     }
 
     public String remover(Long id) {
-        try {
-            departamentoRepository.deleteById(id);
-        } catch (Exception e) {
-            return e.getMessage();
+
+        DepartamentoModel departamento = departamentoRepository.findById(id).orElse(null);
+
+        if (departamento == null) {
+            return "Departamento não encontrado";
         }
-        return "Removido com Sucesso";
+
+        if (departamento.getGerente() != null ||
+                departamento.getCoordenador() != null) {
+
+            return "Não é possível remover um departamento vinculado";
+        }
+
+        departamentoRepository.deleteById(id);
+
+        return "Departamento removido com sucesso";
     }
-    
+
     public DepartamentoModel buscarPorId(Long id) {
         return departamentoRepository.findById(id).orElse(null);
     }
-
 
     public DepartamentoRepository getDeparmentoRepository() {
         return departamentoRepository;
@@ -46,6 +55,5 @@ public class DepartamentoService {
     public void setDepartamentoRepository(DepartamentoRepository departamentoRepository) {
         this.departamentoRepository = departamentoRepository;
     }
-
 
 }

@@ -53,13 +53,9 @@ public class HoleriteService {
         return holeriteRepository.findAll();
     }
 
-    public String remover(Long id) {
-        try {
+    public void remover(Long id) {
             holeriteRepository.deleteById(id);
-        } catch (Exception e) {
-            return e.getMessage();
-        }
-        return "Removido com Sucesso";
+     
     }
     
     public HoleriteModel buscarPorId(Long id) {

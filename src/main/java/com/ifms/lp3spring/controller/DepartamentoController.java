@@ -1,6 +1,7 @@
 package com.ifms.lp3spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ifms.lp3spring.Service.CoordenadorService;
 import com.ifms.lp3spring.Service.DepartamentoService;
@@ -67,8 +69,17 @@ public class DepartamentoController {
     }
 
     @GetMapping("/removerdepartamento/{id}")
-    public String remover(@PathVariable("id") Long id) {
-        departamentoService.remover(id);
+    public String remover(@PathVariable Long id,
+            RedirectAttributes redirectAttributes) {
+
+        String retorno = departamentoService.remover(id);
+
+        if (retorno.contains("sucesso")) {
+            redirectAttributes.addFlashAttribute("sucesso", retorno);
+        } else {
+            redirectAttributes.addFlashAttribute("erro", retorno);
+        }
+
         return "redirect:/manterdepartamento";
     }
 

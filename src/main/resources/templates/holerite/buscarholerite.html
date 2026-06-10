@@ -1,59 +1,158 @@
-<!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layoutprincipal.html}">
-
-<head>
+<!doctype html>
+<html
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layoutprincipal.html}"
+>
+  <head>
     <title>Manter Holerite</title>
-</head>
+  </head>
 
-<body>
-    <div class=" container" layout:fragment="conteudoprincipal">
-        <div class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis" style="background-color: #E9F1FA">
-            <div class="col-lg-6 px-0">
-                <h1 class="display-4 fst-italic">Manter Holerite</h1>
-            </div>
+  <body>
+    <div class="container" layout:fragment="conteudoprincipal">
+      <div
+        class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis"
+        style="background-color: #e9f1fa"
+      >
+        <div class="col-lg-6 px-0">
+          <h1 class="display-4 fst-italic">Manter Holerite</h1>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th>Funcionário</th>
-                    <th>CPF</th>
-                    <th>Mês Referência</th>
-                    <th>Salário Base</th>
-                    <th>Salário Líquido</th>
-                    <th>Data Pagamento</th>
-                    <th>Ações</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="holerite : ${holerites}">
-                    <th scope="row"><span th:text="${holerite.idHolerite}"></span></th>
-                    <td th:text="${holerite.funcionario.nome}"></td>
-                    <td th:text="${holerite.funcionario.cpf}"></td>
-                    <td th:text="${holerite.mesReferencia}"></td>
-                    <td th:text="'R$ ' + ${#numbers.formatDecimal(holerite.salarioBase, 2, 2)}"></td>
-                    <td th:text="'R$ ' + ${#numbers.formatDecimal(holerite.salarioLiquido, 2, 2)}"></td>
-                    <td th:text="${holerite.dataPagamento}"></td>
-                    <td>
-                        <form th:action="@{/editarholerite/{id}(id=${holerite.idHolerite})}" method="get"
-                            onsubmit="return confirm('Deseja realmente editar este holerite?');">
-                            <button type="submit" class="btn btn-warning">Editar</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form th:action="@{/removerholerite/{id}(id=${holerite.idHolerite})}" method="get"
-                            onsubmit="return confirm('Deseja realmente remover este holerite?');">
-                            <button type="submit" class="btn btn-danger">Remover</button>
-                        </form>
-                    </td>
-                </tr>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th>Funcionário</th>
+            <th>CPF</th>
+            <th>Mês Referência</th>
+            <th>Salário Base</th>
+            <th>Salário Líquido</th>
+            <th>Data Pagamento</th>
+            <th>Ações</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="holerite : ${holerites}">
+            <th scope="row"><span th:text="${holerite.idHolerite}"></span></th>
+            <td th:text="${holerite.funcionario.nome}"></td>
+            <td th:text="${holerite.funcionario.cpf}"></td>
+            <td th:text="${holerite.mesReferencia}"></td>
+            <td
+              th:text="'R$ ' + ${#numbers.formatDecimal(holerite.salarioBase, 2, 2)}"
+            ></td>
+            <td
+              th:text="'R$ ' + ${#numbers.formatDecimal(holerite.salarioLiquido, 2, 2)}"
+            ></td>
+            <td th:text="${holerite.dataPagamento}"></td>
+            <td>
+              <form
+                th:action="@{/editarholerite/{id}(id=${holerite.idHolerite})}"
+                method="get"
+                onsubmit="
+                  return confirm('Deseja realmente editar este holerite?');
+                "
+              >
+                <button type="submit" class="btn btn-warning">Editar</button>
+              </form>
+            </td>
+            <td>
+              <form
+                th:action="@{/removerholerite/{id}(id=${holerite.idHolerite})}"
+                method="get"
+                onsubmit="
+                  return confirm('Deseja realmente remover este holerite?');
+                "
+              >
+                <button type="submit" class="btn btn-danger">Remover</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-            </tbody>
-        </table>
-    </div>
-    </div>
-</body>
+      <div class="modal fade" id="modalErro" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+              <h5 class="modal-title">Erro de Exclusão</h5>
 
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+
+            <div class="modal-body">
+              <span th:text="${erro}"></span>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Ok
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script th:if="${erro}">
+        window.onload = function () {
+          let modal = new bootstrap.Modal(document.getElementById("modalErro"));
+
+          modal.show();
+        };
+      </script>
+
+      <div
+        class="modal fade"
+        id="modalSucesso"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+              <h5 class="modal-title">Tudo Certo!</h5>
+
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+
+            <div class="modal-body">
+              <span th:text="${sucesso}"></span>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Ok
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script th:if="${sucesso}">
+        window.onload = function () {
+          let modal = new bootstrap.Modal(
+            document.getElementById("modalSucesso"),
+          );
+
+          modal.show();
+        };
+      </script>
+    </div>
+  </body>
 </html>
