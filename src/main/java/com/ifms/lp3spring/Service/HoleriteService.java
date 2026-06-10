@@ -10,6 +10,7 @@ import com.ifms.lp3spring.Interface.CalculoSalarioCoordenador;
 import com.ifms.lp3spring.Interface.CalculoSalarioGerente;
 import com.ifms.lp3spring.Repository.HoleriteRepository;
 import com.ifms.lp3spring.model.Cargo;
+import com.ifms.lp3spring.model.DepartamentoModel;
 import com.ifms.lp3spring.model.FuncionarioModel;
 import com.ifms.lp3spring.model.HoleriteModel;
 
@@ -53,9 +54,23 @@ public class HoleriteService {
         return holeriteRepository.findAll();
     }
 
-    public void remover(Long id) {
-            holeriteRepository.deleteById(id);
-     
+  
+    public String remover(Long id) {
+
+        HoleriteModel holerite = holeriteRepository.findById(id).orElse(null);
+
+        if (holerite == null) {
+            return "Holerite não encontrado";
+        }
+
+        if (holerite.getFuncionario() != null) {
+
+            return "Não é possível remover um holerite com funcionários associados.";
+        }
+
+        holeriteRepository.deleteById(id);
+
+        return "Holerite removido com sucesso";
     }
     
     public HoleriteModel buscarPorId(Long id) {

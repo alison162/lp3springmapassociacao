@@ -36,7 +36,7 @@ public class DepartamentoService {
         if (departamento.getGerente() != null ||
                 departamento.getCoordenador() != null) {
 
-            return "Não é possível remover um departamento vinculado";
+            return "Não é possível remover um departamento com funcionários associados. Demita ou transfira os funcionários antes de remover o departamento.";
         }
 
         departamentoRepository.deleteById(id);

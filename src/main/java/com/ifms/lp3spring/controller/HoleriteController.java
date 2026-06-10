@@ -64,34 +64,20 @@ public class HoleriteController {
         return mv;
     }
 
-@GetMapping("/removerholerite/{id}")
-public String remover(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+    @GetMapping("/removerholerite/{id}")
+    public String remover(@PathVariable Long id,
+            RedirectAttributes redirectAttributes) {
 
-    try {
+        String retorno = holeriteService.remover(id);
 
-        holeriteService.remover(id);
+        if (retorno.contains("sucesso")) {
+            redirectAttributes.addFlashAttribute("sucesso", retorno);
+        } else {
+            redirectAttributes.addFlashAttribute("erro", retorno);
+        }
 
-        redirectAttributes.addFlashAttribute(
-                "sucesso",
-                "Holerite removido com sucesso!"
-        );
-
-    } catch (DataIntegrityViolationException e) {
-
-        redirectAttributes.addFlashAttribute(
-                "erro",
-                "Não é possível excluir este holerite pois ele está vinculado a um relacionamento."
-        );
-
-    } catch (Exception e) {
-
-        redirectAttributes.addFlashAttribute(
-                "erro",
-                "Erro ao remover holerite."
-        );
+        return "redirect:/manterholerite";
     }
 
-    return "redirect:/manterholerite";
-}
 
 }
