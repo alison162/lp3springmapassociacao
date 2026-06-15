@@ -17,13 +17,10 @@ public class FuncionarioService {
 
 
     public String inserir(FuncionarioModel funcionario) {
-        try {
+     
             funcionarioRepository.save(funcionario);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }
-        return "Funcionário salvo com sucesso!";
+     
+            return "Funcionário salvo com sucesso!";
     }
 
 
@@ -44,6 +41,7 @@ public class FuncionarioService {
  
     public void remover(Long id) {
         funcionarioRepository.deleteById(id);
+        
     }
 
 

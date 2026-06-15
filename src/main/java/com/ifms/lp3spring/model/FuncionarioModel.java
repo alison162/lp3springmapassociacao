@@ -19,6 +19,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.AssertTrue;
+import java.time.Period;
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
@@ -149,5 +151,21 @@ public abstract class FuncionarioModel {
         this.dataNascimento = dataNascimento;
         this.cargo = cargo;
     }
+
+
+
+    
+@AssertTrue(message = "O funcionário deve ter pelo menos 16 anos na data da admissão")
+public boolean isIdadeValidaParaAdmissao() {
+
+    System.out.println("VALIDANDO IDADE");
+
+    if (dataNascimento == null || dataAdmissao == null) {
+        return true;
+    }
+
+    return Period.between(dataNascimento, dataAdmissao)
+                 .getYears() >= 16;
+}
 
 }

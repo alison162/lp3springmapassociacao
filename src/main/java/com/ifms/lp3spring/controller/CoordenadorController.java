@@ -2,6 +2,7 @@ package com.ifms.lp3spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,6 +12,7 @@ import com.ifms.lp3spring.Service.CoordenadorService;
 import com.ifms.lp3spring.Service.DepartamentoService;
 import com.ifms.lp3spring.model.Cargo;
 import com.ifms.lp3spring.model.CoordenadorModel;
+import com.ifms.lp3spring.model.GerenteModel;
 
 import jakarta.validation.Valid;
 
@@ -33,18 +35,24 @@ public class CoordenadorController {
     }
 
 
-    @PostMapping("/salvarcoordenador")
-    public ModelAndView salvar(@Valid @ModelAttribute("coordenador") CoordenadorModel coordenador,
-            BindingResult result) {
-        if (result.hasErrors()) {
-            ModelAndView mv = new ModelAndView("coordenador/salvarcoordenador");
-            mv.addObject("departamentos", departamentoService.buscarTodos());
-            return mv;
-        }
-        
+  @PostMapping("/salvarcoordenador")
+    public String postSalvar(@Valid @ModelAttribute("coordenador") CoordenadorModel coordenador,
+            BindingResult result, Model model) {
+
+        System.out.println("ENTROU NO POST");
+
+       if (result.hasErrors()) {
+
+    model.addAttribute("temErro", true);
+    model.addAttribute("erros", result.getAllErrors());
+
+    return "coordenador/salvarcoordenador";
+}
+
         coordenador.setCargo(Cargo.COORDENADOR);
         coordenadorService.inserir(coordenador);
-        return new ModelAndView("redirect:/mantercoordenador");
+
+        return "redirect:/mantercoordenador";
     }
 
 
