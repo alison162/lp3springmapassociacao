@@ -48,7 +48,7 @@ public class DepartamentoController {
         }
 
         departamentoService.inserir(departamento);
-        return "redirect:/salvardepartamento";
+        return "redirect:/manterdepartamento";
     }
 
     @GetMapping("/manterdepartamento")
