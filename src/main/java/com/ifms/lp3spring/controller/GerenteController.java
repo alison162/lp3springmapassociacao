@@ -31,7 +31,6 @@ public class GerenteController {
     public String postSalvar(@Valid @ModelAttribute("gerente") GerenteModel gerente,
             BindingResult result, Model model) {
 
-        System.out.println("ENTROU NO POST");
 
        if (result.hasErrors()) {
 

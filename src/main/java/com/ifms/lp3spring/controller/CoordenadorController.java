@@ -39,8 +39,6 @@ public class CoordenadorController {
     public String postSalvar(@Valid @ModelAttribute("coordenador") CoordenadorModel coordenador,
             BindingResult result, Model model) {
 
-        System.out.println("ENTROU NO POST");
-
        if (result.hasErrors()) {
 
     model.addAttribute("temErro", true);
