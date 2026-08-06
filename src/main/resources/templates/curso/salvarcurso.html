@@ -1,0 +1,67 @@
+<!doctype html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layoutprincipal.html}"
+>
+  <head>
+    <title>Salvar Curso</title>
+  </head>
+
+  <body>
+    <div class="container" layout:fragment="conteudoprincipal">
+      <div
+        class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis"
+        style="background-color: #e9f1fa"
+      >
+        <div class="col-lg-6 px-0">
+          <h1 class="display-4 fst-italic">Salvar Curso</h1>
+
+          <p class="lead my-3">Preencha os dados do Curso.</p>
+        </div>
+      </div>
+
+      <form th:action="@{/salvarcurso}" th:object="${curso}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div class="row mb-3">
+          <div class="col-8">
+            <label for="inputnome" class="form-label"> Nome</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputnome"
+              th:field="*{nome}"
+            />
+            <ul>
+              <li
+                th:each="error : ${#fields.errors('nome')}"
+                th:text="${error}"
+                class="text-danger"
+              ></li>
+            </ul>
+          </div>
+          <div class="col-4">
+            <label for="carga" class="form-label">Carga Horária</label>
+            <input
+              type="number"
+              class="form-control"
+              id="carga"
+              th:field="*{cargaHoraria}"
+            />
+            <ul>
+              <li
+                th:each="error : ${#fields.errors('cargaHoraria')}"
+                th:text="${error}"
+                class="text-danger"
+              ></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-4">
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

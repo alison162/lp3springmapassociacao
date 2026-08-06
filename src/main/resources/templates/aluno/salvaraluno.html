@@ -1,0 +1,106 @@
+<!doctype html>
+<html
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layoutprincipal.html}"
+>
+  <head>
+    <title>Salvar Aluno</title>
+  </head>
+
+  <body>
+    <div class="container" layout:fragment="conteudoprincipal">
+      <div
+        class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis"
+        style="background-color: #e9f1fa"
+      >
+        <div class="col-lg-6 px-0">
+          <h1 class="display-4 fst-italic">Salvar Aluno</h1>
+          <p class="lead my-3">Preencha os dados do Aluno.</p>
+          <p class="lead mb-0">
+            <a href="#" class="text-body-emphasis fw-bold"
+              >Continue reading...</a
+            >
+          </p>
+        </div>
+      </div>
+
+      <form
+        th:action="@{/salvaraluno}"
+        th:object="${aluno}"
+        method="post"
+        class="row g-3"
+      >
+        <input type="hidden" th:field="*{id}" />
+        <div class="row">
+          <div class="col-md-9">
+            <label for="nome" class="form-label">Nome</label>
+            <input
+              id="nome"
+              type="text"
+              class="form-control"
+              th:field="*{nome}"
+            />
+            <div
+              class="text-danger"
+              th:if="${#fields.hasErrors('nome')}"
+              th:errors="*{nome}"
+            ></div>
+          </div>
+
+          <div class="col-md-3">
+            <label for="cpf" class="form-label">CPF</label>
+            <input
+              id="cpf"
+              type="text"
+              class="form-control"
+              th:field="*{cpf}"
+            />
+            <div
+              class="text-danger"
+              th:if="${#fields.hasErrors('cpf')}"
+              th:errors="*{cpf}"
+            ></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <label for="email" class="form-label">Email</label>
+            <input
+              id="email"
+              type="email"
+              class="form-control"
+              th:field="*{email}"
+            />
+            <div
+              class="text-danger"
+              th:if="${#fields.hasErrors('email')}"
+              th:errors="*{email}"
+            ></div>
+          </div>
+
+          <div class="col-3">
+            <label for="dataNascimento" class="form-label"
+              >Data de Nascimento</label
+            >
+            <input
+              id="dataNascimento"
+              type="date"
+              class="form-control"
+              th:field="*{dataNascimento}"
+            />
+            <div
+              class="text-danger"
+              th:if="${#fields.hasErrors('dataNascimento')}"
+              th:errors="*{dataNascimento}"
+            ></div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,107 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-----------------Menu da aplicação------------------------------------------------------------------------------>
     <nav class="navbar navbar-expand-lg bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" target="_blank" href="/principal">
-                <img th:src="@{/imagens/logo.png}" alt="Logo da instituição do RH" class="d-inline-block align-text-top"
-                    style="height: 60px;">
-            </a>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/home">Principal</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Gerente
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/salvargerente">Salvar</a></li>
-                            <li><a class="dropdown-item" href="/mantergerente">Buscar / Remover / Alterar</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Configurações</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Coordenador
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/salvarcoordenador">Salvar</a></li>
-                            <li><a class="dropdown-item" href="/mantercoordenador">Buscar / Remover / Alterar</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Configurações</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Departamento
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/salvardepartamento">Salvar</a></li>
-                            <li><a class="dropdown-item" href="/manterdepartamento">Buscar / Remover / Alterar</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Configurações</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Holerite
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/salvarholerite">Salvar</a></li>
-                            <li><a class="dropdown-item" href="/manterholerite">Buscar / Remover / Alterar</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Configurações</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+      <div class="container-fluid">
+        <a class="navbar-brand" target="_blank" href="/principal">
+          <img
+            th:src="@{/imagens/logo.png}"
+            alt="Logo da instituição do RH"
+            class="d-inline-block align-text-top"
+            style="height: 60px"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/home"
+                >Principal</a
+              >
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Aluno
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/salvaraluno">Salvar</a></li>
+                <li>
+                  <a class="dropdown-item" href="/manteraluno"
+                    >Buscar / Remover / Alterar</a
+                  >
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li><a class="dropdown-item" href="#">Configurações</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Cursos
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/salvarcurso">Salvar</a></li>
+                <li>
+                  <a class="dropdown-item" href="/mantercurso"
+                    >Buscar / Remover / Alterar</a
+                  >
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li><a class="dropdown-item" href="#">Configurações</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Matricula
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="/salvarmatricula">Salvar</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/mantermatricula"
+                    >Buscar / Remover / Alterar</a
+                  >
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li><a class="dropdown-item" href="#">Configurações</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
     <!------------------------------------------------------------------------------------------------------------------>
     <!-----------------Parte principal da aplicação------------------------------------------------------------------------------>
     <!-- Aqui o conteúdo das páginas filhas será injetado -->
     <div class="container mt-4" layout:fragment="conteudoprincipal">
-        <!-- O Thymeleaf substitui isso pelo conteúdo da página filha -->
+      <!-- O Thymeleaf substitui isso pelo conteúdo da página filha -->
     </div>
 
     <!------------------------------------------------------------------------------------------------------------------>
     <footer class="py-3 mt-5 border-top bg-primary text-center">
-        <div class="container" >
-            <p>© 2017–2026 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
-        </div>
+      <div class="container">
+        <p>
+          © 2017–2026 Company, Inc. · <a href="#">Privacy</a> ·
+          <a href="#">Terms</a>
+        </p>
+      </div>
     </footer>
-</body>
-
+  </body>
 </html>

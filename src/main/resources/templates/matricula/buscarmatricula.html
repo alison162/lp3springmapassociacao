@@ -1,0 +1,68 @@
+<!doctype html>
+<html
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layoutprincipal.html}"
+>
+  <head>
+    <title>Manter Holerite</title>
+  </head>
+
+  <body>
+    <div class="container" layout:fragment="conteudoprincipal">
+      <div
+        class="p-4 p-md-5 mt-4 mb-4 rounded text-body-emphasis"
+        style="background-color: #e9f1fa"
+      >
+        <div class="col-lg-6 px-0">
+          <h1 class="display-4 fst-italic">Manter Matrícula</h1>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th>Nome</th>
+            <th>Curso</th>
+            <th>Data Matrícula</th>
+            <th>Status</th>
+            <th>Ações</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="matricula : ${matriculas}">
+            <th scope="row"><span th:text="${matricula.id}"></span></th>
+            <td th:text="${matricula.aluno.nome}"></td>
+            <td th:text="${matricula.curso.nome}"></td>
+            <td th:text="${matricula.dataMatricula}"></td>
+            <td th:text="${matricula.status}"></td>
+
+            <td>
+              <form
+                th:action="@{/editarmatricula/{id}(id=${matricula.id})}"
+                method="get"
+                onsubmit="
+                  return confirm('Deseja realmente editar esta matrícula?');
+                "
+              >
+                <button type="submit" class="btn btn-warning">Editar</button>
+              </form>
+            </td>
+            <td>
+              <form
+                th:action="@{/removermatricula/{id}(id=${matricula.id})}"
+                method="get"
+                onsubmit="
+                  return confirm('Deseja realmente remover esta matrícula?');
+                "
+              >
+                <button type="submit" class="btn btn-danger">Remover</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
